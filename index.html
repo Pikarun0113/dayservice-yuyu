@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>デイサービス友遊 | ご利用案内・会社情報・採用</title>
+  <meta name="description" content="福島県相馬市のデイサービス友遊。ご利用案内、会社情報、採用（Googleフォーム応募）とアクセス地図を掲載。" />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    /* ===== ベース ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif; line-height: 1.6; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    :root {
+      --bg: #0f172a; --panel: #111827; --text: #e5e7eb; --muted: #94a3b8;
+      --brand: #10b981; --brand-strong: #059669; --ring: #6ee7b7; --border:#1f2937; --card:#0b1220; --radius:16px; --container:min(1100px,92vw);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#fff; --panel:#f8fafc; --text:#0f172a; --muted:#475569; --brand:#10b981; --brand-strong:#059669; --ring:#86efac; --border:#e5e7eb; --card:#fff; }
+    }
+
+    /* 全体背景（ここで bg.png を指定） */
+    body { background: var(--bg) url("images/bg.png") center/cover no-repeat fixed; color: var(--text); }
+
+    .container { width: var(--container); margin-inline: auto; }
+    .visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; border:0; clip:rect(0,0,0,0); }
+
+    /* ===== ナビ ===== */
+    header { position: sticky; top: 0; z-index: 50; background: rgba(17,24,39,.6); backdrop-filter: saturate(150%) blur(8px); border-bottom: 1px solid var(--border); }
+    @media (prefers-color-scheme: light){ header{ background: rgba(255,255,255,.7);} }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0; }
+    .brand { display:inline-flex; align-items:center; gap:.6rem; font-weight:700; }
+    .brand-mark { width:28px; height:28px; border-radius:8px; background: radial-gradient(120% 120% at 10% 10%, #34d399 0%, #10b981 45%, #2dd4bf 100%); }
+    nav ul { list-style:none; display:flex; gap:1rem; margin:0; padding:0; }
+    nav a { padding:.5rem .75rem; border-radius:10px; font-weight:600; color: var(--muted); }
+    nav a:hover { color: var(--text); background: color-mix(in oklab, var(--brand) 18%, transparent); }
+    #navToggle { display:none; }
+    @media (max-width: 800px){
+      #navToggle { display:inline-flex; align-items:center; gap:.5rem; padding:.5rem .75rem; border-radius:12px; border:1px solid var(--border); background:var(--panel); }
+      nav { position:absolute; inset: calc(100% + 1px) 0 auto 0; background: var(--panel); border-bottom:1px solid var(--border); transform: translateY(-12px); opacity:0; pointer-events:none; transition:.2s ease; }
+      nav.open { transform: translateY(0); opacity:1; pointer-events:auto; }
+      nav ul { flex-direction: column; padding:.75rem; }
+      nav a { display:block; }
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      padding: 96px 0 64px;
+      border-bottom:1px solid var(--border);
+      background:
+        radial-gradient(900px 400px at 20% -10%, color-mix(in oklab, var(--brand) 14%, transparent), transparent);
+    }
+    .hero h1 { font-size: clamp(28px, 4vw + 10px, 46px); line-height:1.15; margin:0 0 12px; }
+    .hero p  { font-size: clamp(16px, 1.2vw + 10px, 19px); color: var(--muted); margin: 0 0 24px; }
+    /* 読みやすさ向上：テキストの背面を薄く */
+    .hero .container { background: color-mix(in oklab, #fff 78%, transparent); border-radius: 16px; padding: 18px; }
+    @media (prefers-color-scheme: dark){
+      .hero .container { background: color-mix(in oklab, #0b1220 88%, transparent); }
+    }
+
+    .actions { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.85rem 1.1rem; border-radius:999px; font-weight:700; border:1px solid transparent; }
+    .btn-primary { background: linear-gradient(180deg, var(--brand), var(--brand-strong)); color:#fff; }
+    .btn-ghost { background: transparent; color: var(--text); border:1px solid var(--border); }
+    .btn-primary:hover { filter: brightness(1.05); }
+
+    /* ===== セクション ===== */
+    section { padding:64px 0; }
+    .section-title { font-size: clamp(22px, 2.2vw + 10px, 32px); margin:0 0 8px; }
+    .section-desc { color: var(--muted); margin:0 0 24px; }
+
+    .grid { display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+    .card {
+      grid-column: span 6;
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      opacity:0;
+      transform: translateY(6px);
+      transition:.5s ease;
+    }
+    .card.revealed { opacity:1; transform: translateY(0); }
+    .card h3 { margin:0 0 8px; font-size:18px; }
+    .card p { margin:0; color:var(--muted); }
+    @media (max-width: 900px){ .card { grid-column: span 12; } }
+
+    /* 掲示物リンクカード（カード全体をクリック可） */
+    a.card { display:block; }
+    a.card:hover { box-shadow: 0 16px 44px rgba(0,0,0,.22); transform: translateY(0); }
+    a.card:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+
+    /* ===== 写真（いい感じ版） ===== */
+    .gallery-wrap { display:grid; gap:16px; }
+
+    /* 大きいスライダー */
+    .carousel {
+      position: relative;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+    }
+    .carousel-track {
+      display:flex;
+      overflow:auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .carousel-track::-webkit-scrollbar { height: 10px; }
+    .carousel-track::-webkit-scrollbar-thumb { background: color-mix(in oklab, var(--border) 85%, transparent); border-radius: 999px; }
+    .slide {
+      min-width: 100%;
+      scroll-snap-align: start;
+      position: relative;
+    }
+    .slide figure { margin:0; }
+    .slide .media {
+      aspect-ratio: 21 / 9;
+      width:100%;
+      background: color-mix(in oklab, var(--panel) 80%, transparent);
+    }
+    .slide img {
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+    @media (max-width: 900px){
+      .slide .media { aspect-ratio: 16 / 10; }
+    }
+    .slide .caption {
+      position:absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(17,24,39,.65);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #fff;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .caption strong { font-size: 16px; display:block; }
+    .caption span { font-size: 13px; opacity: .9; }
+
+    .carousel-btn {
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index: 2;
+    }
+    .carousel-btn:hover { background: rgba(0,0,0,.48); }
+    .carousel-btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+    .carousel-prev { left: 12px; }
+    .carousel-next { right: 12px; }
+
+    .dots {
+      position:absolute;
+      left: 12px;
+      top: 12px;
+      display:flex;
+      gap: 8px;
+      z-index: 2;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 8px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+    .dot {
+      width: 10px; height:10px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.20);
+      cursor:pointer;
+    }
+    .dot[aria-current="true"] { background: rgba(255,255,255,.95); }
+
+    /* 下の写真カード */
+    .photo-grid { display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+    .photo-card {
+      grid-column: span 6;
+      padding: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      transition: transform .2s ease, box-shadow .2s ease;
+      opacity:0;
+      transform: translateY(6px);
+    }
+    .photo-card.revealed { opacity:1; transform: translateY(0); }
+    .photo-card:hover { box-shadow: 0 16px 44px rgba(0,0,0,.22); transform: translateY(-2px); }
+    .photo-media { aspect-ratio: 16 / 10; background: color-mix(in oklab, var(--panel) 80%, transparent); }
+    .photo-media img { width:100%; height:100%; object-fit: cover; cursor: zoom-in; }
+    .photo-body { padding: 14px 16px 16px; }
+    .photo-body h3 { margin:0 0 6px; font-size: 18px; }
+    .photo-body p { margin:0; color: var(--muted); }
+
+    /* ロゴは余白が必要 */
+    .logo .photo-media { aspect-ratio: 4 / 3; }
+    .logo .photo-media img { object-fit: contain; background: color-mix(in oklab, #fff 6%, transparent); }
+
+    @media (max-width: 900px){
+      .photo-card { grid-column: span 12; }
+    }
+
+    /* ===== ライトボックス ===== */
+    .lb {
+      position: fixed; inset: 0; z-index: 999;
+      display:none; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.68);
+      padding: 16px;
+    }
+    .lb.open { display:flex; }
+    .lb-inner {
+      max-width: min(1100px, 94vw);
+      max-height: 92vh;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+      background: #000;
+    }
+    .lb-inner img { max-width: 100%; max-height: 92vh; object-fit: contain; display:block; }
+    .lb-close {
+      position: fixed; top: 14px; right: 14px; z-index: 1000;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.45);
+      color: #fff;
+      padding: .6rem .9rem;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor:pointer;
+    }
+
+    /* ===== フッター ===== */
+    footer { border-top:1px solid var(--border); padding:28px 0 56px; color:var(--muted); text-align:center; }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== ヘッダー ===== -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span>デイサービス友遊</span></a>
+      <button id="navToggle" aria-controls="nav" aria-expanded="false" aria-label="メニューを開閉">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>メニュー</span>
+      </button>
+      <nav id="nav" aria-label="メインメニュー">
+        <ul class="container">
+          <li><a href="#services">ご利用案内</a></li>
+          <li><a href="#gallery">写真</a></li>
+          <li><a href="#recruit">採用情報</a></li>
+          <li><a href="#company">会社概要</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#notices">掲示物</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== ヒーロー ===== -->
+  <main id="top" class="hero">
+    <div class="container">
+      <h1>その人らしさを支える、<br/>地域密着のデイサービス。</h1>
+      <p>安心して過ごせる毎日をサポート。見学・体験もお気軽にご相談ください。</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#services">サービスを見る</a>
+        <a class="btn btn-ghost" href="#gallery">写真を見る</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== ご利用案内 ===== -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">ご利用案内</h2>
+      <p class="section-desc">介護保険のご相談から具体的な支援内容まで丁寧にご説明します。</p>
+      <div class="grid">
+        <article class="card reveal">
+          <h3>通所介護（デイサービス）</h3>
+          <p>機能訓練・レクリエーション・入浴・食事の提供で、日中を安心してお過ごしいただけます。</p>
+        </article>
+        <article class="card reveal">
+          <h3>ご家族のサポート</h3>
+          <p>送迎や見守り、連絡ノート等でご家族との連携も大切にしています。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 写真（いい感じに追加） ===== -->
+  <section id="gallery" aria-label="写真">
+    <div class="container">
+      <h2 class="section-title">写真</h2>
+      <p class="section-desc">外観・室内・パンフレットなどを掲載しています（クリックで拡大表示）。</p>
+
+      <div class="gallery-wrap">
+        <!-- 大きいスライダー（外観/室内） -->
+        <div class="carousel" aria-label="写真スライダー">
+          <div class="dots" role="tablist" aria-label="スライド選択">
+            <button class="dot" type="button" aria-current="true" aria-label="外観へ"></button>
+            <button class="dot" type="button" aria-current="false" aria-label="室内へ"></button>
+          </div>
+
+          <button class="carousel-btn carousel-prev" type="button" aria-label="前へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-btn carousel-next" type="button" aria-label="次へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="carousel-track" id="carouselTrack">
+            <div class="slide">
+              <figure>
+                <div class="media">
+                  <img src="images/building.jpg" alt="施設の外観" loading="lazy" data-lb="images/building.jpg">
+                </div>
+                <figcaption class="caption">
+                  <div>
+                   
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="slide">
+              <figure>
+                <div class="media">
+                  <img src="images/room.jpg" alt="施設の室内" loading="lazy" data-lb="images/room.jpg">
+                </div>
+                <figcaption class="caption">
+                  <div>
+                    <strong>室内</strong>
+                    <span>落ち着いて過ごせる空間づくりを心がけています</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <!-- 下段：パンフ＋ロゴ -->
+        <div class="photo-grid">
+          <article class="photo-card reveal" data-lb="images/flyer1.jpg">
+            <div class="photo-media">
+              <img src="images/flyer1.jpg" alt="パンフレット画像 1" loading="lazy" data-lb="images/flyer1.jpg">
+            </div>
+            <div class="photo-body">
+</p>
+            </div>
+          </article>
+
+          <article class="photo-card reveal" data-lb="images/flyer2.jpg">
+            <div class="photo-media">
+              <img src="images/flyer2.jpg" alt="パンフレット画像 2" loading="lazy" data-lb="images/flyer2.jpg">
+            </div>
+            <div class="photo-body">
+              
+            </div>
+          </article>
+
+          <article class="photo-card reveal logo" data-lb="images/logo_black.jpg">
+            <div class="photo-media">
+              <img src="images/logo_black.jpg" alt="ロゴ（黒）" loading="lazy" data-lb="images/logo_black.jpg">
+            </div>
+            <div class="photo-body">
+              <h3>ロゴ</h3>
+              <p>デイサービス友遊</p>
+            </div>
+          </article>
+
+          <article class="photo-card reveal logo" data-lb="images/logo_yotsuba.jpg">
+            <div class="photo-media">
+              <img src="images/logo_yotsuba.jpg" alt="ロゴ（よつば）" loading="lazy" data-lb="images/logo_yotsuba.jpg">
+            </div>
+            <div class="photo-body">
+              <h3>ロゴ（よつば）</h3>
+              <p>友遊よつば</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 採用（Googleフォーム：リンクで開く） ===== -->
+  <section id="recruit">
+    <div class="container">
+      <h2 class="section-title">採用情報</h2>
+      <p class="section-desc">未経験の方も歓迎。資格取得のサポート制度あり。<strong>Googleフォーム</strong>からご応募ください。</p>
+
+      <div class="grid">
+        <a class="card reveal" href="https://docs.google.com/forms/d/e/1FAIpQLSdioxQdp9FOUp3jB1hbvV9DR5okDm27rTKgqm-zXISaGrPZ3g/viewform?usp=header" target="_blank" rel="noopener">
+          <h3>応募フォームを開く</h3>
+          <p>クリックするとGoogleフォームが新しいタブで開きます。</p>
+        </a>
+
+        <article class="card reveal">
+          <h3>補足</h3>
+          <p>フォームの内容はGoogleフォーム側でいつでも編集できます（サイト側の修正は不要です）。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 会社概要 ===== -->
+  <section id="company">
+    <div class="container">
+      <h2 class="section-title">会社概要</h2>
+      <p class="section-desc">下記はいただいた情報を反映しています。必要に応じて追記ください。</p>
+      <div class="grid">
+        <article class="card reveal"><h3>事業所名</h3><p>デイサービス友遊</p></article>
+        <article class="card reveal"><h3>所在地（南飯渕）</h3><p>福島県相馬市南飯渕字木関無９３</p></article>
+        <article class="card reveal"><h3>所在地（中村）</h3><p>福島県相馬市中村字北町１－８</p></article>
+        <article class="card reveal"><h3>電話番号</h3><p><a href="tel:0244363582">0244-36-3582</a></p></article>
+        <article class="card reveal"><h3>事業内容</h3><p>通所介護（デイサービス）／介護予防支援 ほか</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== アクセス（Googleマップ埋め込み） ===== -->
+  <section id="access" aria-label="アクセス">
+    <div class="container">
+      <h2 class="section-title">アクセス</h2>
+      <p class="section-desc">各拠点の地図です。スマートフォンの地図アプリで開くこともできます。</p>
+      <div class="grid">
+        <article class="card reveal">
+          <h3>南飯渕（木関無９３）</h3>
+          <p><a href="https://www.google.com/maps?q=福島県相馬市南飯渕字木関無93" target="_blank" rel="noopener">Googleマップで開く</a></p>
+          <div style="aspect-ratio:16/9; width:100%;">
+            <iframe src="https://www.google.com/maps?q=福島県相馬市南飯渕字木関無93&output=embed" width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="南飯渕（木関無93）"></iframe>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3>中村（北町１－８）</h3>
+          <p><a href="https://www.google.com/maps?q=福島県相馬市中村字北町1-8" target="_blank" rel="noopener">Googleマップで開く</a></p>
+          <div style="aspect-ratio:16/9; width:100%;">
+            <iframe src="https://www.google.com/maps?q=福島県相馬市中村字北町1-8&output=embed" width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="中村（北町1-8）"></iframe>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 掲示物（notice1.html / notice2.html へリンク） ===== -->
+  <section id="notices">
+    <div class="container">
+      <h2 class="section-title">掲示物</h2>
+      <p class="section-desc">クリックすると掲示内容ページ（notice1.html / notice2.html）を開きます。</p>
+
+      <div class="grid">
+        <a class="card reveal" href="notice1.html">
+          <h3>身体拘束排除、個人情報の取り扱い、相談苦情対応について</h3>
+          <p>内容を表示する</p>
+        </a>
+
+        <a class="card reveal" href="notice2.html">
+          <h3>理念・運営方針、施設概要、利用料金</h3>
+          <p>内容を表示する</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="y"></span> デイサービス友遊</small>
+    </div>
+  </footer>
+
+  <!-- ライトボックス -->
+  <button class="lb-close" id="lbClose" type="button" aria-label="拡大表示を閉じる">閉じる</button>
+  <div class="lb" id="lb" aria-hidden="true">
+    <div class="lb-inner">
+      <img id="lbImg" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    // ===== ユーティリティ =====
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    // ===== スマホナビ開閉 =====
+    const nav = $('#nav');
+    const navToggle = $('#navToggle');
+    navToggle?.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+    });
+    $$('nav a').forEach(a => a.addEventListener('click', () => {
+      nav?.classList.remove('open');
+      navToggle?.setAttribute('aria-expanded','false');
+    }));
+
+    // ===== スムーススクロール（# だけ対象） =====
+    $$('a[href^="#"]').forEach(link => link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      const id = href.slice(1);
+      const el = id ? document.getElementById(id) : null;
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }));
+
+    // ===== カードのフェードイン =====
+    const cards = $$('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => {
+        es.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      cards.forEach(c => io.observe(c));
+    } else {
+      cards.forEach(c => c.classList.add('revealed'));
+    }
+
+    // ===== 写真スライダー =====
+    const track = $('#carouselTrack');
+    const prevBtn = $('.carousel-prev');
+    const nextBtn = $('.carousel-next');
+    const dots = $$('.dot');
+
+    function scrollToIndex(i){
+      if (!track) return;
+      const x = i * track.clientWidth;
+      track.scrollTo({ left: x, behavior: 'smooth' });
+    }
+    function setCurrentDot(){
+      if (!track || dots.length === 0) return;
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((d, i) => d.setAttribute('aria-current', String(i === idx)));
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      if (!track) return;
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      scrollToIndex(Math.max(0, idx - 1));
+    });
+    nextBtn?.addEventListener('click', () => {
+      if (!track) return;
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      scrollToIndex(Math.min(dots.length - 1, idx + 1));
+    });
+    dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+    track?.addEventListener('scroll', () => window.requestAnimationFrame(setCurrentDot));
+    window.addEventListener('resize', setCurrentDot);
+
+    // ===== ライトボックス（クリックで拡大） =====
+    const lb = $('#lb');
+    const lbImg = $('#lbImg');
+    const lbClose = $('#lbClose');
+
+    function openLB(src, alt=''){
+      if (!lb || !lbImg) return;
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden','false');
+      lbClose.style.display = 'inline-flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(){
+      if (!lb || !lbImg) return;
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden','true');
+      lbImg.src = '';
+      lbClose.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    lbClose.style.display = 'none';
+
+    // data-lb を持つimgを全部拡大対応
+    $$('img[data-lb]').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const src = img.getAttribute('data-lb');
+        if (src) openLB(src, img.alt || '');
+      });
+    });
+    // カード（下段）をクリックしても拡大
+    $$('.photo-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const src = card.getAttribute('data-lb');
+        const img = card.querySelector('img');
+        if (src) openLB(src, img?.alt || '');
+      });
+    });
+
+    lb?.addEventListener('click', closeLB);
+    lbClose?.addEventListener('click', closeLB);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLB(); });
+
+    // 年号
+    $('#y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
