@@ -259,6 +259,46 @@
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
     }
+
+    /* ===== ここから：主要セクションを「白背景＋黒文字」にする ===== */
+#services, #gallery, #recruit, #company, #access, #notices{
+  color: #000;
+  background: color-mix(in oklab, #fff 88%, transparent);
+}
+
+/* 見出し・説明文 */
+#services .section-title, #gallery .section-title, #recruit .section-title, #company .section-title, #access .section-title, #notices .section-title{
+  color:#000;
+}
+#services .section-desc, #gallery .section-desc, #recruit .section-desc, #company .section-desc, #access .section-desc, #notices .section-desc{
+  color:#333;
+}
+
+/* カード類（中身も黒） */
+#services .card, #recruit .card, #company .card, #access .card, #notices .card{
+  background:#fff;
+}
+#services .card h3, #recruit .card h3, #company .card h3, #access .card h3, #notices .card h3{
+  color:#000;
+}
+#services .card p, #recruit .card p, #company .card p, #access .card p, #notices .card p{
+  color:#333;
+}
+
+/* 写真セクションの枠（白背景に） */
+#gallery .carousel,
+#gallery .photo-card{
+  background:#fff;
+}
+#gallery .photo-body h3{ color:#000; }
+#gallery .photo-body p{ color:#333; }
+
+/* セクション内リンクも黒（青リンクにしたい場合はここを変えてOK） */
+#services a, #gallery a, #recruit a, #company a, #access a, #notices a{
+  color:#000;
+}
+/* ===== ここまで ===== */
+
   </style>
 </head>
 <body>
