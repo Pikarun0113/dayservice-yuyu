@@ -1,106 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>掲示物２ | デイサービス友遊</title>
-  <style>
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;
-      line-height:1.85;
-      background:#fff;
-      color:#111;
-    }
-    .wrap{ max-width: 980px; margin: 0 auto; padding: 24px 16px 80px; }
-    h1{ font-size: 22px; margin: 0 0 8px; }
-    h2{ font-size: 18px; margin: 28px 0 8px; padding-top: 10px; border-top: 1px solid #ddd; }
-    h3{ font-size: 16px; margin: 18px 0 8px; }
-    p, li{ font-size: 15px; }
-    .lead{ color:#444; margin:0 0 14px; }
-    .btn{
-      display:inline-block; padding:10px 14px; border-radius:999px;
-      border:1px solid #ddd; text-decoration:none; color:#111;
-    }
-    .box{
-      background:#f6f7f8; border:1px solid #e5e7eb; padding:12px; border-radius:12px;
-    }
-    ul{ padding-left: 20px; }
-    pre{
-      white-space: pre-wrap;
-      word-break: break-word;
-      background:#0b1220;
-      color:#e5e7eb;
-      padding:12px;
-      border-radius:12px;
-      overflow:auto;
-      font-size: 13px;
-      line-height:1.6;
-    }
-    .small{ color:#555; font-size: 13px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="理念・運営方針・施設概要・利用料金について｜デイサービス 友遊">
+  <title>掲示物２ | デイサービス 友遊</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <main class="wrap">
-    <a class="btn" href="index.html">← ホームへ戻る</a>
+<body class="subpage">
 
-    <h1>掲示物２：理念・運営方針、施設概要、利用料金</h1>
-    <p class="lead">デイサービス友遊（Web掲載用）</p>
+  <!-- ===== ヘッダー ===== -->
+  <header class="top_header">
+    <div class="header_inner">
+      <h1>
+        <a href="index.html">デイサービス 友遊</a>
+      </h1>
+      <div id="nav_toggle" role="button" tabindex="0" aria-label="メニューを開閉">
+        <div>
+          <span></span>
+          <span></span>
+          <span></span>
+          <p>MENU</p>
+        </div>
+      </div>
+      <div class="header_tel">
+        <a href="tel:0244-36-3582">
+          <img src="https://placehold.jp/20x20.png" alt="電話アイコン">
+          <span class="tel_num">0244-36-3582</span>
+          <span class="tel_hours">受付時間 平日8:00〜17:30</span>
+        </a>
+      </div>
+      <nav class="top_nav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li class="has_dropdown">
+            <a href="service.html">施設案内</a>
+            <ul class="dropdown">
+              <li><a href="service.html#dayservice">デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">入浴サービス</a></li>
+              <li><a href="service.html#flow">1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#news">お知らせ</a></li>
+          <li><a href="#">会社概要</a></li>
+          <li><a href="./recruit.html" class="nav_recruit_btn">求人情報</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <h2>デイサービス友遊の理念</h2>
-    <ul>
-      <li>利用者個人の尊重と尊厳をもったサービスを提供する。</li>
-      <li>利用者の権利と安全を最優先とした介護を実践する。</li>
-      <li>自立支援に向けての介護サービスを提供する。</li>
-      <li>介護サービスの質の向上と適正なサービスを提供する。</li>
-    </ul>
+  <!-- ===== メインコンテンツ ===== -->
+  <main>
 
-    <h2>デイサービス友遊の運営方針</h2>
-    <ul>
-      <li>
-        事業所の通所介護従業者は、要介護状態の心身の特性を踏まえて、その利用者が可能な限りその居宅において、
-        その有する能力に応じ自立した日常生活を営むことができるよう、さらに利用者の社会的孤立感の解消及び心身機能の維持並びに
-        その家族の身体的、精神的負担の軽減を図るために、必要な日常生活上の世話及び機能訓練等の介護その他必要な援助を行う。
-      </li>
-      <li>
-        利用者の意思及び人格を尊重し、自傷他害の恐れがある等緊急やむを得ない以外、原則として利用者に対し身体の拘束は行わない。
-      </li>
-      <li>
-        事業の実施にあたっては、関係市町村、地域の保健・医療・福祉サービスとの綿密な連携を図り、総合的なサービスの提供に努めるものとする。
-      </li>
-    </ul>
+    <!-- ページタイトル -->
+    <section class="page_title_area">
+      <div class="page_title_inner">
+        <p class="page_title_en">Notice</p>
+        <h2 class="page_title_ja">お知らせ</h2>
+      </div>
+    </section>
 
-    <h2>デイサービス友遊の施設の概要</h2>
+    <!-- 記事本文 -->
+    <div class="notice_article_wrap">
+      <article class="notice_article">
 
-    <h3>（1）提供できるサービスの種類と地域</h3>
-    <pre>所在地　〒976-0026　福島県相馬市南飯渕字木関無９３
+        <!-- 記事メタ情報 -->
+        <div class="notice_meta">
+          <span class="date">2026.03.15</span>
+          <span class="cat">お知らせ</span>
+        </div>
+
+        <h1>理念・運営方針、施設概要、利用料金について</h1>
+        <p>掲示物２（Web掲載用）</p>
+
+        <h2>デイサービス友遊の理念</h2>
+        <ul>
+          <li>利用者個人の尊重と尊厳をもったサービスを提供する。</li>
+          <li>利用者の権利と安全を最優先とした介護を実践する。</li>
+          <li>自立支援に向けての介護サービスを提供する。</li>
+          <li>介護サービスの質の向上と適正なサービスを提供する。</li>
+        </ul>
+
+        <h2>デイサービス友遊の運営方針</h2>
+        <ul>
+          <li>事業所の通所介護従業者は、要介護状態の心身の特性を踏まえて、その利用者が可能な限りその居宅において、その有する能力に応じ自立した日常生活を営むことができるよう、さらに利用者の社会的孤立感の解消及び心身機能の維持並びにその家族の身体的、精神的負担の軽減を図るために、必要な日常生活上の世話及び機能訓練等の介護その他必要な援助を行う。</li>
+          <li>利用者の意思及び人格を尊重し、自傷他害の恐れがある等緊急やむを得ない以外、原則として利用者に対し身体の拘束は行わない。</li>
+          <li>事業の実施にあたっては、関係市町村、地域の保健・医療・福祉サービスとの綿密な連携を図り、総合的なサービスの提供に努めるものとする。</li>
+        </ul>
+
+        <h2>デイサービス友遊の施設の概要</h2>
+
+        <h3>（1）提供できるサービスの種類と地域</h3>
+        <pre>所在地　〒976-0026　福島県相馬市南飯渕字木関無９３
 TEL・FAX　(0244)36-3582
 介護保険指定番号　地域密着型通所介護・介護予防通所介護（福島県 0770900504 号）
 サービス提供地域　相馬市(玉野地域除く)および新地町、南相馬市鹿島区とする。
 一日の利用定員　１５名（介護予防通所介護サービス利用者を含む）</pre>
 
-    <h3>（2）職員体制及び職務内容</h3>
-    <pre>職種／員数／職務内容／勤務時間
+        <h3>（2）職員体制及び職務内容</h3>
+        <pre>職種／員数／職務内容／勤務時間
 管理者　1名　業務及び従業員等を一元的に管理　8:00～17:00
 生活相談員　2名　相談対応・サービス調整・関係機関連携
 機能訓練指導員　2名（看護職員を兼務）　機能回復訓練　9:00～14:00
 介護職員　5名　日常生活上の介護など適切な援助　8:00～17:00
 看護職員　2名（機能訓練指導員を兼務）　日常生活上の看護など　9:00～12:00</pre>
 
-    <h3>（3）設備の概要</h3>
-    <p class="box">食堂及び機能訓練室、静養室、浴室、相談室、事務室、送迎車両、トイレ</p>
+        <h3>（3）設備の概要</h3>
+        <p class="box">食堂及び機能訓練室、静養室、浴室、相談室、事務室、送迎車両、トイレ</p>
 
-    <h3>（4）営業日時</h3>
-    <pre>営業日　月～金曜日
+        <h3>（4）営業日時</h3>
+        <pre>営業日　月～金曜日
 営業時間　午前8時～午後5時
 サービス提供時間　午前8時55分～午後4時05分
 休日　土、日、祝日および 12/31、1/1、1/2、1/3</pre>
 
-    <h2>デイサービス友遊の利用料金</h2>
+        <h2>デイサービス友遊の利用料金</h2>
 
-    <h3>1 利用料</h3>
-    <h3>（1）利用料（1割負担の場合）</h3>
-    <pre>地域密着型通所介護費（所要時間7時間以上8時間未満）
+        <h3>1 利用料</h3>
+        <h3>（1）利用料（1割負担の場合）</h3>
+        <pre>地域密着型通所介護費（所要時間7時間以上8時間未満）
 
 要介護1　自己負担 753円／日　利用料金 7,530円／日
 要介護2　自己負担 890円／日　利用料金 8,900円／日
@@ -112,8 +133,8 @@ TEL・FAX　(0244)36-3582
 要支援1　自己負担 1,798円／月　利用料金 17,980円／月
 要支援2　自己負担 3,621円／月　利用料金 36,210円／月</pre>
 
-    <h3>（2）加算料金</h3>
-    <pre>入浴介助加算　自己負担 40円／日　利用料金 400円／日（1日につき）
+        <h3>（2）加算料金</h3>
+        <pre>入浴介助加算　自己負担 40円／日　利用料金 400円／日（1日につき）
 処遇改善加算Ⅰ　上記金額（単位）の合計に8%（0.08）を掛け合わせた額が加算
 通常地域外送迎　20円／1km（消費税込み） 片道につき
 食費（おやつ代含む） 680円
@@ -124,39 +145,39 @@ TEL・FAX　(0244)36-3582
 クラブ活動費等　実費
 教養娯楽費　100円／日</pre>
 
-    <p class="small">※ 一定以上所得者は2割または3割負担となる場合があります。介護保険適用外サービスは全額自己負担です。</p>
+        <p class="small">※ 一定以上所得者は2割または3割負担となる場合があります。介護保険適用外サービスは全額自己負担です。</p>
 
-    <h3>（3）償還払いについて</h3>
-    <p>利用者がまだ要介護認定を受けていない場合には、サービス利用料金の全額を一旦お支払いいただきます。要支援又は要介護の認定を受けた後、自己負担額を除く金額が介護保険から払い戻されます（償還払い）。居宅サービス計画が作成されていない場合も償還払いとなります。償還払いとなる場合、保険給付の申請に必要となる事項を記載した「サービス提供証明書」を交付します。</p>
+        <h3>（3）償還払いについて</h3>
+        <p>利用者がまだ要介護認定を受けていない場合には、サービス利用料金の全額を一旦お支払いいただきます。要支援又は要介護の認定を受けた後、自己負担額を除く金額が介護保険から払い戻されます（償還払い）。居宅サービス計画が作成されていない場合も償還払いとなります。償還払いとなる場合、保険給付の申請に必要となる事項を記載した「サービス提供証明書」を交付します。</p>
 
-    <h2>デイサービス友遊Ⅱの施設の概要</h2>
+        <h2>デイサービス友遊Ⅱの施設の概要</h2>
 
-    <h3>（1）提供できるサービスの種類と地域</h3>
-    <pre>所在地　〒976-0042　福島県相馬市中村字北町１－８
+        <h3>（1）提供できるサービスの種類と地域</h3>
+        <pre>所在地　〒976-0042　福島県相馬市中村字北町１－８
 TEL・FAX　(0244)26-5424
 介護保険指定番号　地域密着型通所介護・介護予防通所介護（福島県 0770900561 号）
 サービス提供地域　相馬市および新地町、南相馬市鹿島区とする。
 一日の利用定員　18名（介護予防通所介護サービス利用者を含む）</pre>
 
-    <h3>（2）職員体制及び職務内容</h3>
-    <pre>職種／員数／職務内容／勤務時間
+        <h3>（2）職員体制及び職務内容</h3>
+        <pre>職種／員数／職務内容／勤務時間
 管理者　1名　業務及び従業員等を一元的に管理　8:45～17:45
 生活相談員　2名　相談対応・サービス調整・関係機関連携
 機能訓練指導員　2名（看護職員を兼務）　機能回復訓練　13:00～16:00
 介護職員　5名　日常生活上の介護など適切な援助　8:45～17:45
 看護職員　2名（機能訓練指導員を兼務）　日常生活上の看護など　13:00～16:00</pre>
 
-    <h3>（3）設備の概要</h3>
-    <p class="box">食堂及び機能訓練室、静養室、浴室、相談室、事務室、送迎車両、トイレ</p>
+        <h3>（3）設備の概要</h3>
+        <p class="box">食堂及び機能訓練室、静養室、浴室、相談室、事務室、送迎車両、トイレ</p>
 
-    <h3>（4）営業日時</h3>
-    <pre>営業日　月～金曜日
+        <h3>（4）営業日時</h3>
+        <pre>営業日　月～金曜日
 営業時間　午前8時45分～午後5時45分
 サービス提供時間　午前9時40分～午後4時50分
 休日　土、日、祝日および 12/31、1/1、1/2、1/3</pre>
 
-    <h2>デイサービス友遊Ⅱの利用料金</h2>
-    <pre>（基本の考え方・注意事項は「デイサービス友遊の利用料金」と同様）
+        <h2>デイサービス友遊Ⅱの利用料金</h2>
+        <pre>（基本の考え方・注意事項は「デイサービス友遊の利用料金」と同様）
 ※ 表記の金額・単位は掲示物原文に基づきます。最新の制度・単価変更がある場合は更新してください。
 
 地域密着型通所介護費（所要時間7時間以上8時間未満）
@@ -177,28 +198,28 @@ TEL・FAX　(0244)26-5424
 食費（おやつ代含む） 680円
 おむつ代／クラブ活動費等／教養娯楽費（100円／日） など</pre>
 
-    <h2>訪問介護サービス友遊の施設の概要</h2>
+        <h2>訪問介護サービス友遊の施設の概要</h2>
 
-    <h3>（1）サービス種類と地域</h3>
-    <pre>所在地　〒976-0042　福島県相馬市中村字北町１－８
+        <h3>（1）サービス種類と地域</h3>
+        <pre>所在地　〒976-0042　福島県相馬市中村字北町１－８
 TEL・FAX　(0244)26-5424
 介護保険指定番号　訪問介護・介護予防訪問介護（福島県 0770900611 号）
 障がい者支援 事業所指定番号　居宅介護・重度訪問介護（福島県 0710900267 号）
 サービス提供地域　相馬市および新地町、南相馬市鹿島区とする。</pre>
 
-    <h3>（2）職員体制及び職務内容</h3>
-    <pre>管理者　1名（兼務有）　業務及び従業員等を一元的に管理
+        <h3>（2）職員体制及び職務内容</h3>
+        <pre>管理者　1名（兼務有）　業務及び従業員等を一元的に管理
 サービス提供責任者　2名（兼務有）　相談対応・サービス調整・関係機関連携
 訪問介護員　7名（デイサービス介護員との兼務有）　日常生活上の介護など適切な援助
 事務職員　1名　事務全般</pre>
 
-    <h3>（3）営業日時</h3>
-    <pre>営業日　月～日曜日
+        <h3>（3）営業日時</h3>
+        <pre>営業日　月～日曜日
 営業時間　午前8時30分～午後5時30分
 休日　土曜日、日曜日、国民の祝日、お盆（8/13、14、15）、年末年始（12/30、31、1/1、2、3）</pre>
 
-    <h2>訪問介護サービス友遊（高齢者）の利用料金</h2>
-    <pre>（1）身体介護
+        <h2>訪問介護サービス友遊（高齢者）の利用料金</h2>
+        <pre>（1）身体介護
 20分未満　163単位　163円／回（1割の場合）
 20分以上30分未満　244単位　244円／回
 30分以上60分未満　387単位　387円／回
@@ -224,15 +245,15 @@ TEL・FAX　(0244)26-5424
 訪問型サービスⅡ（要支援1,2）週2回程度：23,490円／月（2,349単位）自己負担 2,349円
 訪問型サービスⅢ（要支援2）週3回程度：37,270円／月（3,727単位）自己負担 3,727円</pre>
 
-    <h3>加算等</h3>
-    <pre>初回訪問加算：初回訪問時 1回200単位
+        <h3>加算等</h3>
+        <pre>初回訪問加算：初回訪問時 1回200単位
 特定事業所加算(Ⅱ)：所定単位数の10%
 介護職員処遇改善加算(Ⅰ)：所定単位数の1000分の182
 地域外交通費：15km未満無料／15km以上 20円/1km
 キャンセル料：前営業日12時までに連絡なし→基本料金の50%</pre>
 
-    <h3>介護タクシー料金について</h3>
-    <pre>（1）①乗降介助（身体介護を伴わない） 介護保険負担額＋下記（片道）
+        <h3>介護タクシー料金について</h3>
+        <pre>（1）①乗降介助（身体介護を伴わない） 介護保険負担額＋下記（片道）
 0～3km圏内：800円
 3～7km圏内：1,900円
 7～11km圏内：3,500円
@@ -251,8 +272,8 @@ TEL・FAX　(0244)26-5424
 スロープ：500円（1回）
 タクシー自費サービス：3,300円（30分につき）</pre>
 
-    <h2>訪問介護サービス友遊（障がい者）の利用料金</h2>
-    <pre>1 利用料
+        <h2>訪問介護サービス友遊（障がい者）の利用料金</h2>
+        <pre>1 利用料
 （1）身体介護
 30分未満 256単位：256円
 30分以上1時間未満 404単位：404円
@@ -276,16 +297,16 @@ TEL・FAX　(0244)26-5424
 ※時間帯別加算（早朝・夜間・深夜）あり
 ※制度適用外は全額自己負担</pre>
 
-    <h3>加算等</h3>
-    <pre>初回訪問加算：初回訪問時 1回200単位
+        <h3>加算等</h3>
+        <pre>初回訪問加算：初回訪問時 1回200単位
 緊急時対応加算：月2回を限度に1回100単位
 特定事業所加算(Ⅱ)：所定単位数の10%
 利用者負担上限管理加算：150単位
 介護職員処遇改善加算(Ⅲ)：所定単位数の1000分の347
 地域外交通費：15km未満無料／15km以上 20円/1km</pre>
 
-    <h2>居宅介護支援事業所友遊の施設の概要</h2>
-    <pre>名称　居宅介護支援事業所 友遊
+        <h2>居宅介護支援事業所友遊の施設の概要</h2>
+        <pre>名称　居宅介護支援事業所 友遊
 所在地　〒976-0042　福島県相馬市中村字北町１－８
 TEL・FAX　(0244)32-0943
 介護保険指定番号　居宅介護支援事業所（福島県 0770900629 号）
@@ -301,7 +322,77 @@ TEL・FAX　(0244)32-0943
 営業時間　午前9時～午後5時
 休日　土日祝、お盆（8/13、14、15）、年末年始（12/30、31、1/1、2、3）</pre>
 
-    <p class="small">※ 掲載内容に変更があった場合は、こちらのページを更新してください。</p>
+        <p class="small">※ 掲載内容に変更があった場合は、こちらのページを更新してください。</p>
+
+        <!-- 戻るボタン -->
+        <div class="notice_back_btn">
+          <a href="index.html#news" class="more_btn">← お知らせ一覧へ戻る</a>
+        </div>
+
+      </article>
+    </div>
+
   </main>
+
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="footer_inner">
+      <div class="footer_left">
+        <div class="footer_logo">
+          <a href="index.html">デイサービス 友遊</a>
+        </div>
+        <address class="footer_address">
+          <p>〒976-0036<br>福島県相馬市南飯渕字木関無９３</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=福島県相馬市南飯渕字木関無93" class="footer_map" target="_blank" rel="noopener noreferrer">【Google Map】</a>
+        </address>
+        <div class="footer_tel">
+          <a href="tel:0244-36-3582">
+            <img src="https://placehold.jp/ffffff/ffffff/20x20.png" alt="電話アイコン">
+            <span class="footer_tel_num">0244-36-3582</span>
+          </a>
+          <p class="footer_tel_hours">受付時間 平日8:00〜17:30</p>
+        </div>
+      </div>
+      <nav class="footer_nav" aria-label="フッターナビゲーション">
+        <ul class="footer_nav_list">
+          <li><a href="index.html#news">▶ お知らせ</a></li>
+          <li>
+            <span class="footer_nav_parent">▼ 施設案内</span>
+            <ul class="footer_nav_sub">
+              <li><a href="service.html#dayservice">▶ デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">▶ 入浴サービス</a></li>
+              <li><a href="service.html#flow">▶ 1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="#">▶ 会社概要</a></li>
+          <li><a href="./recruit.html">▶ 求人情報</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer_copy">
+      <p>©デイサービス 友遊</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav_toggle');
+    const header = document.querySelector('.top_header');
+    function toggleMenu() { header.classList.toggle('open'); }
+    toggle.addEventListener('click', toggleMenu);
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+    document.querySelectorAll('.has_dropdown > a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (window.innerWidth <= 1080) {
+          e.preventDefault();
+          link.parentElement.classList.toggle('active');
+          const dd = link.parentElement.querySelector('.dropdown');
+          if (dd) dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

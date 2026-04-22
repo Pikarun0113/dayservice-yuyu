@@ -1,0 +1,1377 @@
+@charset "UTF-8";
+
+/* ===========================
+   Reset / Base
+=========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+  font-size: 1.6rem;
+  color: #252525;
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* ===========================
+   TOP HEADER
+=========================== */
+.top_header {
+  position: fixed;
+  width: 100%;
+  height: 86px;
+  z-index: 1000;
+  background-color: rgba(37, 37, 37, 0.88);
+  backdrop-filter: blur(4px);
+}
+
+.top_header #nav_toggle {
+  display: none;
+}
+
+.top_header .header_inner {
+  width: 100%;
+  height: 86px;
+  position: relative;
+  /* flexbox でロゴ・電話・ナビを横並びに整列 */
+  display: flex;
+  align-items: center;
+  padding: 0 6%;
+}
+
+/* --- ロゴ --- */
+.top_header .header_inner h1 {
+  flex-shrink: 0;
+  width: 94px;
+  height: 60px;
+  background: url(./images/logo_yotsuba.jpg) no-repeat center center;
+  background-size: contain;
+}
+
+.top_header .header_inner h1:hover {
+  opacity: .8;
+}
+
+.top_header .header_inner h1 a {
+  display: block;
+  width: 94px;
+  height: 60px;
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* --- 電話番号 --- */
+.top_header .header_inner .header_tel {
+  margin-left: auto; /* ロゴとの間を埋めて右側へ */
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.top_header .header_inner .header_tel a {
+  color: #fff;
+  display: inline-block;
+}
+
+.top_header .header_inner .header_tel img {
+  width: 18px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.top_header .header_inner .header_tel .tel_num {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: block;
+}
+
+.top_header .header_inner .header_tel .tel_hours {
+  font-size: 1.1rem;
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- ナビゲーション --- */
+.top_header .header_inner .top_nav {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.top_header .header_inner .top_nav > ul {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.top_header .header_inner .top_nav > ul > li {
+  margin-left: 14px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+}
+
+.top_header .header_inner .top_nav > ul > li > a {
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.top_header .header_inner .top_nav > ul > li > a::after {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.top_header .header_inner .top_nav > ul > li > a:hover::after {
+  bottom: -4px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- 求人情報ボタン（ナビ末尾） --- */
+.top_header .header_inner .top_nav .nav_recruit_btn {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #e07d3a;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color .2s, opacity .2s;
+  white-space: nowrap;
+}
+
+.top_header .header_inner .top_nav .nav_recruit_btn:hover {
+  background-color: #c96828;
+  opacity: 1;
+}
+
+/* ボタンにはアンダーラインアニメーションを無効化 */
+.top_header .header_inner .top_nav li:has(.nav_recruit_btn) > a::after {
+  display: none;
+}
+
+/* --- ドロップダウン --- */
+.top_header .header_inner .top_nav .dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  min-width: 200px;
+  background-color: rgba(37, 37, 37, 0.92);
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.top_header .header_inner .top_nav .has_dropdown:hover .dropdown {
+  display: block;
+}
+
+.top_header .header_inner .top_nav .dropdown li {
+  margin: 0;
+}
+
+.top_header .header_inner .top_nav .dropdown li a {
+  display: block;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: normal;
+  white-space: nowrap;
+  transition: background-color .2s;
+}
+
+.top_header .header_inner .top_nav .dropdown li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top_header .header_inner .top_nav .dropdown li a::after {
+  display: none;
+}
+
+/* ===========================
+   RESPONSIVE（～1080px）
+=========================== */
+@media screen and (max-width: 1080px) {
+
+  .top_header .header_inner .header_tel {
+    display: none;
+  }
+
+  /* ナビ：スライドダウンオーバーレイに戻す */
+  .top_header .header_inner .top_nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: none;
+    padding-top: 86px;
+    text-align: right;
+    background-color: #252525;
+    z-index: -1;
+    margin-left: 0;
+  }
+
+  .top_header .header_inner .top_nav > ul {
+    display: block;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .top_header .header_inner .top_nav > ul > li {
+    margin-left: 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+  /* スマホでの求人ボタン */
+  .top_header .header_inner .top_nav .nav_recruit_btn {
+    display: inline-block;
+    padding: 6px 16px;
+  }
+
+  /* ドロップダウン（スマホ）：JS で .active 付与時に表示 */
+  .top_header .header_inner .top_nav .dropdown {
+    position: static;
+    background: none;
+    padding: 4px 0 0;
+    min-width: auto;
+    display: none;
+  }
+
+  .top_header .header_inner .top_nav .has_dropdown:hover .dropdown {
+    display: none;
+  }
+
+  .top_header .header_inner .top_nav .has_dropdown.active .dropdown {
+    display: block;
+  }
+
+  .top_header .header_inner .top_nav .dropdown li a {
+    padding: 4px 10px;
+    font-size: 1.3rem;
+  }
+
+  /* ハンバーガーボタン */
+  .top_header #nav_toggle {
+    display: block;
+    width: 36px;
+    position: absolute;
+    top: 24px;
+    right: 6%;
+    cursor: pointer;
+  }
+
+  .top_header #nav_toggle div {
+    position: relative;
+    height: 36px;
+  }
+
+  .top_header #nav_toggle span {
+    display: block;
+    height: 3px;
+    background: #fff;
+    position: absolute;
+    width: 36px;
+    right: 0;
+    transition: 0.5s ease-in-out;
+  }
+
+  .top_header #nav_toggle span:nth-child(1) {
+    top: 0;
+  }
+
+  .top_header #nav_toggle span:nth-child(2) {
+    top: 12px;
+  }
+
+  .top_header #nav_toggle span:nth-child(3) {
+    top: 24px;
+  }
+
+  .top_header #nav_toggle p {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 36px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  /* open 時：ナビ表示 */
+  .top_header.open .top_nav {
+    display: block;
+  }
+
+  /* open 時：ハンバーガー → ✕ */
+  .top_header.open #nav_toggle span:nth-child(1) {
+    top: 12px;
+    transform: rotate(135deg);
+  }
+
+  .top_header.open #nav_toggle span:nth-child(2) {
+    width: 0;
+    left: 50%;
+  }
+
+  .top_header.open #nav_toggle span:nth-child(3) {
+    top: 12px;
+    transform: rotate(-135deg);
+  }
+}
+
+/* ===========================
+   RESPONSIVE（～767px）
+=========================== */
+@media screen and (max-width: 767px) {
+
+  .top_header .header_inner h1 {
+    width: 70px;
+    height: 60px;
+  }
+
+  .top_header .header_inner h1 a {
+    width: 70px;
+    height: 60px;
+  }
+}
+
+/* ===========================
+   TOP MAIN VISUAL
+=========================== */
+.top_mv_area {
+  width: 100%;
+}
+
+.top_mv_area .top_mv_wrap {
+  background-color: #252525;
+}
+
+/* スライダー本体（ul.slide） */
+.top_mv_area .top_mv_wrap .slide {
+  position: relative;
+  display: block;
+  width: 90%;
+  padding-top: 50.2%; /* PC：横幅の約50%＝2:1アスペクト比 */
+}
+
+/* PC画像 */
+.top_mv_area .top_mv_wrap .slide .img_pc {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* SP画像（デフォルト非表示） */
+.top_mv_area .top_mv_wrap .slide .img_sp {
+  display: none;
+}
+
+/* 各スライドアイテム */
+.top_mv_area .top_mv_wrap .slide li {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.top_mv_area .top_mv_wrap .slide li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+/* キャッチコピー */
+.top_mv_area .top_mv_wrap .slide li h2 {
+  position: absolute;
+  bottom: 30px;
+  left: 6%;
+  font-size: 8rem;
+  line-height: 9.8rem;
+  font-weight: bold;
+  color: #fff;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* CTAリンク */
+.top_mv_area .top_mv_wrap .slide li .mv_link {
+  position: absolute;
+  bottom: 0;
+  left: 6%;
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.4rem;
+  transition: background-color .2s, color .2s;
+}
+
+.top_mv_area .top_mv_wrap .slide li .mv_link:hover {
+  background-color: #fff;
+  color: #252525;
+}
+
+/* 下部アクセントバー */
+.top_mv_area .top_mv_bottom {
+  background-color: #252525;
+  width: 80%;
+  height: 60px;
+  margin-left: auto;
+}
+
+/* bxSlider デフォルト上書き */
+.top_mv_area .top_mv_wrap .bx-wrapper {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.top_mv_area .top_mv_wrap .bx-wrapper .bx-viewport {
+  background: #252525;
+}
+
+/* ===========================
+   TOP MV RESPONSIVE（～1080px）
+=========================== */
+@media screen and (max-width: 1080px) {
+
+  .top_mv_area .top_mv_wrap .slide li h2 {
+    font-size: 5rem;
+    line-height: 6rem;
+  }
+}
+
+/* ===========================
+   TOP MV RESPONSIVE（～767px）
+=========================== */
+@media screen and (max-width: 767px) {
+
+  .top_mv_area .top_mv_wrap .slide {
+    width: 100%;
+    padding-top: 120%; /* SP：縦長アスペクト比 */
+  }
+
+  /* PC/SP 画像切り替え */
+  .top_mv_area .top_mv_wrap .slide .img_pc {
+    display: none;
+  }
+
+  .top_mv_area .top_mv_wrap .slide .img_sp {
+    display: block;
+  }
+
+  .top_mv_area .top_mv_wrap .slide li h2 {
+    font-size: 4rem;
+    line-height: 5rem;
+  }
+
+  .top_mv_area .top_mv_bottom {
+    height: 30px;
+  }
+}
+
+/* ===========================
+   TOP SERVICE（施設・サービス一覧）
+=========================== */
+.top_service_area {
+  padding: 0 0 80px;
+  width: 100%;
+  background-color: #fff;
+}
+
+/* 3カード横並びコンテナ */
+.top_service_list {
+  display: flex;
+  width: 100%;
+  list-style: none;
+}
+
+/* 各カード */
+.top_service_item {
+  width: 33.333%;
+  overflow: hidden;
+}
+
+.top_service_item > a {
+  display: block;
+  color: #252525;
+  text-decoration: none;
+  height: 100%;
+}
+
+/* カード画像エリア（テキストオーバーレイ） */
+.top_service_kv {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 暗色グラデーションオーバーレイ：文字の視認性を確保 */
+.top_service_kv::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.52) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.top_service_kv img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+
+/* hover：拡大アニメーションのみ（opacityはオーバーレイが担う） */
+.top_service_item > a:hover .top_service_kv img {
+  transform: scale(1.06);
+}
+
+/* h3 オーバーレイテキスト */
+.top_service_kv h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  color: #fff;
+  font-size: 2.4rem;
+  letter-spacing: 0.12rem;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2; /* オーバーレイより前面 */
+  /* 強化した text-shadow で背景色問わず視認性を確保 */
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.9),
+    0 0 24px rgba(0, 0, 0, 0.6);
+}
+
+/* カードテキストエリア */
+.top_service_txt {
+  padding: 24px 20px 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.top_service_txt p {
+  font-size: 1.4rem;
+  line-height: 2.6rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #252525;
+}
+
+.top_service_txt p br {
+  display: inline;
+}
+
+.top_service_txt .more_btn {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 8px 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: 2px solid #000;
+  text-decoration: none;
+  transition: background-color .3s, color .3s;
+  cursor: pointer;
+}
+
+.top_service_txt .more_btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ===========================
+   SERVICE RESPONSIVE（～1080px）
+=========================== */
+@media screen and (max-width: 1080px) {
+
+  .top_service_kv h3 {
+    font-size: 2rem;
+  }
+}
+
+/* ===========================
+   SERVICE RESPONSIVE（～767px）
+=========================== */
+@media screen and (max-width: 767px) {
+
+  /* 縦並びに切り替え */
+  .top_service_list {
+    display: block;
+  }
+
+  .top_service_item {
+    width: 100%;
+  }
+
+  .top_service_kv h3 {
+    font-size: 2.8rem;
+  }
+
+  .top_service_txt {
+    padding: 20px 8%;
+    text-align: left;
+  }
+
+  .top_service_txt p br {
+    display: none;
+  }
+}
+
+/* ===========================
+   TOP NEWS（お知らせ）
+=========================== */
+.top_news_area {
+  padding: 80px 0 100px;
+  background-color: #fff;
+}
+
+.top_news_wrap {
+  width: 800px;
+  margin: 0 auto;
+}
+
+/* セクション見出し */
+.top_news_wrap h3 {
+  color: #000;
+  font-size: 3rem;
+  letter-spacing: 0.16rem;
+  margin-bottom: 20px;
+}
+
+/* ニュースアイテム（dl） */
+.top_news_wrap dl {
+  border-top: 1px solid #000;
+  padding: 16px 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.top_news_wrap dl:last-of-type {
+  border-bottom: 1px solid #000;
+}
+
+/* dt：日付＋カテゴリタグ */
+.top_news_wrap dl dt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 50px;
+  flex-shrink: 0;
+}
+
+.top_news_wrap dl dt .date {
+  white-space: nowrap;
+  color: #252525;
+}
+
+.top_news_wrap dl dt .cat {
+  display: inline-block;
+  border: 1px solid #252525;
+  font-size: 1.2rem;
+  padding: 2px 8px;
+  white-space: nowrap;
+  color: #252525;
+  line-height: 1.6;
+}
+
+/* dd：タイトルリンク */
+.top_news_wrap dl dd {
+  flex: 1;
+}
+
+.top_news_wrap dl dd a {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+}
+
+.top_news_wrap dl dd a::after {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.top_news_wrap dl dd a:hover::after {
+  bottom: -4px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 一覧ボタンエリア */
+.more_btn_wrap {
+  text-align: right;
+  margin-top: 24px;
+}
+
+.more_btn {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 8px 20px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid #000;
+  text-decoration: none;
+  transition: background-color .3s, color .3s;
+}
+
+.more_btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ===========================
+   NEWS RESPONSIVE（～1080px）
+=========================== */
+@media screen and (max-width: 1080px) {
+
+  .top_news_wrap {
+    width: 80%;
+  }
+}
+
+/* ===========================
+   NEWS RESPONSIVE（～767px）
+=========================== */
+@media screen and (max-width: 767px) {
+
+  .top_news_wrap {
+    width: 90%;
+  }
+
+  /* 縦並びに切り替え */
+  .top_news_wrap dl {
+    display: block;
+    padding: 16px 8px;
+  }
+
+  .top_news_wrap dl dt {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .more_btn_wrap {
+    text-align: center;
+  }
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  display: block;
+  background-color: #252525;
+  color: #fff;
+}
+
+/* 左右カラムのコンテナ */
+.footer_inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 60px 0 50px;
+}
+
+/* --- 左カラム：施設情報 --- */
+.footer_left {
+  flex: 0 0 260px;
+}
+
+/* ロゴ */
+.footer_logo {
+  width: 94px;
+  height: 60px;
+  background: url(./images/logo_yotsuba.png) no-repeat center center;
+  background-size: contain;
+  margin-bottom: 28px;
+}
+
+.footer_logo a {
+  display: block;
+  width: 94px;
+  height: 60px;
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 住所 */
+.footer_address {
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  font-style: normal;
+  margin-bottom: 20px;
+}
+
+.footer_address p {
+  margin-bottom: 6px;
+}
+
+.footer_map {
+  color: #fff;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  transition: opacity .2s;
+}
+
+.footer_map:hover {
+  opacity: .7;
+}
+
+/* 電話番号 */
+.footer_tel {
+  margin-top: 20px;
+}
+
+.footer_tel a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer_tel a:hover {
+  opacity: .7;
+}
+
+.footer_tel img {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.footer_tel_num {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.footer_tel_hours {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 4px;
+}
+
+/* --- 右カラム：サイトマップ --- */
+.footer_nav {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.footer_nav_list {
+  list-style: none;
+}
+
+.footer_nav_list > li {
+  margin-bottom: 18px;
+  font-size: 1.4rem;
+}
+
+.footer_nav_list > li > a {
+  color: #fff;
+  display: inline-block;
+  transition: opacity .2s;
+}
+
+.footer_nav_list > li > a:hover {
+  opacity: .7;
+}
+
+/* 施設案内の親ラベル */
+.footer_nav_parent {
+  display: inline-block;
+  color: #fff;
+  margin-bottom: 8px;
+  cursor: default;
+}
+
+/* サブメニュー */
+.footer_nav_sub {
+  list-style: none;
+  padding-left: 16px;
+  margin-top: 6px;
+}
+
+.footer_nav_sub li {
+  margin-bottom: 8px;
+}
+
+.footer_nav_sub li a {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.3rem;
+  transition: color .2s;
+}
+
+.footer_nav_sub li a:hover {
+  color: #fff;
+}
+
+/* --- コピーライトバー --- */
+.footer_copy {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 16px;
+  text-align: center;
+}
+
+.footer_copy p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===========================
+   FOOTER RESPONSIVE（～1080px）
+=========================== */
+@media screen and (max-width: 1080px) {
+
+  .footer_inner {
+    width: 86%;
+    gap: 40px;
+  }
+
+  .footer_left {
+    flex: 0 0 220px;
+  }
+}
+
+/* ===========================
+   FOOTER RESPONSIVE（～767px）
+=========================== */
+@media screen and (max-width: 767px) {
+
+  .footer_inner {
+    display: block;
+    width: 88%;
+    padding: 40px 0 36px;
+  }
+
+  .footer_left {
+    flex: none;
+    width: 100%;
+    margin-bottom: 36px;
+  }
+
+  .footer_nav_list > li {
+    margin-bottom: 14px;
+  }
+}
+
+/* ========================================
+   SUBPAGE 共通（サブページのヘッダー固定背景）
+======================================== */
+.subpage .top_header {
+  background-color: #252525;
+}
+
+/* ========================================
+   ページタイトルエリア
+======================================== */
+.page_title_area {
+  padding-top: 86px; /* fixed header 分を確保 */
+  background-color: #252525;
+  color: #fff;
+  text-align: center;
+  padding-bottom: 60px;
+}
+
+.page_title_en {
+  font-size: 1.3rem;
+  letter-spacing: 0.2rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 10px;
+}
+
+.page_title_ja {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+}
+
+@media screen and (max-width: 767px) {
+  .page_title_ja {
+    font-size: 3rem;
+  }
+}
+
+/* ========================================
+   施設詳細セクション（左右交互レイアウト）
+======================================== */
+.service_detail_section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.service_detail_section:nth-of-type(even) {
+  background-color: #f7f7f7;
+}
+
+.service_detail_inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: 80%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* 右列に画像を配置（交互レイアウト） */
+.service_detail_reverse .service_detail_inner {
+  flex-direction: row-reverse;
+}
+
+/* 画像カラム */
+.service_detail_img {
+  flex: 0 0 48%;
+  overflow: hidden;
+}
+
+.service_detail_img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .4s ease;
+}
+
+.service_detail_img:hover img {
+  transform: scale(1.03);
+}
+
+/* テキストカラム */
+.service_detail_txt {
+  flex: 1;
+}
+
+.service_detail_label {
+  font-size: 1.2rem;
+  letter-spacing: 0.18rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.service_detail_txt h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.16rem;
+  color: #252525;
+  margin-bottom: 24px;
+}
+
+.service_detail_txt p {
+  font-size: 1.4rem;
+  line-height: 2.8rem;
+  color: #252525;
+  margin-bottom: 16px;
+}
+
+.service_detail_txt .more_btn {
+  margin-top: 14px;
+}
+
+/* ========================================
+   1日の流れ セクション
+======================================== */
+.service_flow_section {
+  padding: 80px 0 100px;
+  background-color: #252525;
+  color: #fff;
+}
+
+.service_flow_inner {
+  width: 80%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.service_flow_inner .service_detail_label {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.service_flow_inner h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.16rem;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* タイムライン リスト */
+.flow_list {
+  list-style: none;
+}
+
+.flow_list li {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 1.4rem;
+}
+
+.flow_list li:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.flow_time {
+  flex: 0 0 52px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 0.04rem;
+}
+
+.flow_icon {
+  flex: 0 0 24px;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.flow_txt {
+  flex: 1;
+  line-height: 2.2rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ========================================
+   サービスページ RESPONSIVE（～1080px）
+======================================== */
+@media screen and (max-width: 1080px) {
+
+  .service_detail_inner {
+    width: 86%;
+    gap: 40px;
+  }
+
+  .service_flow_inner {
+    width: 86%;
+  }
+}
+
+/* ========================================
+   サービスページ RESPONSIVE（～767px）
+======================================== */
+@media screen and (max-width: 767px) {
+
+  /* 画像・テキストを縦積み（交互も解除） */
+  .service_detail_inner,
+  .service_detail_reverse .service_detail_inner {
+    flex-direction: column;
+    width: 90%;
+    gap: 28px;
+  }
+
+  .service_detail_img {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .service_detail_txt h3 {
+    font-size: 2.4rem;
+  }
+
+  .service_flow_inner {
+    width: 90%;
+  }
+
+  .service_flow_inner h3 {
+    font-size: 2.4rem;
+    margin-bottom: 28px;
+  }
+
+  .flow_list li {
+    gap: 14px;
+  }
+
+  .flow_time {
+    flex: 0 0 44px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ========================================
+   求人情報ページ
+======================================== */
+.recruit_contact {
+  margin: 40px 0;
+  padding: 32px 40px;
+  background-color: #f5f5f5;
+  border-left: 4px solid #4a7c59;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.recruit_contact_label {
+  font-size: 1.4rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.recruit_tel {
+  margin: 0 0 8px;
+}
+
+.recruit_tel a {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #252525;
+  letter-spacing: 0.04em;
+}
+
+.recruit_tel a:hover {
+  color: #4a7c59;
+}
+
+.recruit_hours {
+  font-size: 1.4rem;
+  color: #666;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .recruit_contact {
+    padding: 24px 20px;
+  }
+
+  .recruit_tel a {
+    font-size: 3rem;
+  }
+}
+
+/* ========================================
+   会社概要セクション（index.html #company）
+======================================== */
+.top_company_area {
+  padding: 80px 0 100px;
+  background-color: #f7f7f5;
+}
+
+.top_company_wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.top_company_wrap h3 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #252525;
+  text-align: center;
+  margin-bottom: 48px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #4a7c59;
+  display: inline-block;
+  width: 100%;
+}
+
+.company_table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.5rem;
+}
+
+.company_table th,
+.company_table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+.company_table th {
+  width: 180px;
+  font-weight: bold;
+  color: #4a7c59;
+  white-space: nowrap;
+  background-color: #f0f5f1;
+}
+
+.company_table td {
+  color: #333;
+}
+
+.company_table td a {
+  color: #4a7c59;
+  text-decoration: underline;
+}
+
+.company_table td a:hover {
+  color: #2e5c3d;
+}
+
+@media screen and (max-width: 767px) {
+  .top_company_area {
+    padding: 60px 0 80px;
+  }
+
+  .company_table th {
+    display: block;
+    width: 100%;
+    padding: 12px 16px 6px;
+    border-bottom: none;
+  }
+
+  .company_table td {
+    display: block;
+    padding: 4px 16px 16px;
+  }
+}

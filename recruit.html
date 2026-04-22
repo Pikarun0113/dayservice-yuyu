@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="求人情報｜デイサービス 友遊">
+  <title>求人情報 | デイサービス 友遊</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="subpage">
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="top_header">
+    <div class="header_inner">
+      <h1>
+        <a href="index.html">デイサービス 友遊</a>
+      </h1>
+      <div id="nav_toggle" role="button" tabindex="0" aria-label="メニューを開閉">
+        <div>
+          <span></span>
+          <span></span>
+          <span></span>
+          <p>MENU</p>
+        </div>
+      </div>
+      <div class="header_tel">
+        <a href="tel:0244-36-3582">
+          <img src="https://placehold.jp/20x20.png" alt="電話アイコン">
+          <span class="tel_num">0244-36-3582</span>
+          <span class="tel_hours">受付時間 平日8:00〜17:30</span>
+        </a>
+      </div>
+      <nav class="top_nav">
+        <ul>
+          <li><a href="./index.html">ホーム</a></li>
+          <li class="has_dropdown">
+            <a href="service.html">施設案内</a>
+            <ul class="dropdown">
+              <li><a href="service.html#dayservice">デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">入浴サービス</a></li>
+              <li><a href="service.html#flow">1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#news">お知らせ</a></li>
+          <li><a href="#">会社概要</a></li>
+          <li><a href="./recruit.html" class="nav_recruit_btn">求人情報</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== メインコンテンツ ===== -->
+  <main>
+
+    <!-- ページタイトル -->
+    <section class="page_title_area">
+      <div class="page_title_inner">
+        <p class="page_title_en">Recruit</p>
+        <h2 class="page_title_ja">求人情報</h2>
+      </div>
+    </section>
+
+    <!-- 記事本文 -->
+    <div class="notice_article_wrap">
+      <article class="notice_article">
+
+        <h1>スタッフ募集のご案内</h1>
+
+        <p>現在、デイサービス 友遊では一緒に働くスタッフを募集しています。募集職種や勤務時間などの詳細につきましては、お気軽にお電話にてお問い合わせください。</p>
+
+        <!-- お問い合わせ先 -->
+        <div class="recruit_contact">
+          <p class="recruit_contact_label">採用に関するお問い合わせ</p>
+          <p class="recruit_tel">
+            <a href="tel:0244-36-3582">0244-36-3582</a>
+          </p>
+          <p class="recruit_hours">受付時間：平日 8:00〜17:30</p>
+        </div>
+
+        <!-- 戻るボタン -->
+        <div class="notice_back_btn">
+          <a href="./index.html" class="more_btn">トップページへ戻る</a>
+        </div>
+
+      </article>
+    </div>
+
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="footer_inner">
+      <div class="footer_left">
+        <div class="footer_logo">
+          <a href="index.html">デイサービス 友遊</a>
+        </div>
+        <address class="footer_address">
+          <p>〒976-0036<br>福島県相馬市南飯渕字木関無９３</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=福島県相馬市南飯渕字木関無93" class="footer_map" target="_blank" rel="noopener noreferrer">【Google Map】</a>
+        </address>
+        <div class="footer_tel">
+          <a href="tel:0244-36-3582">
+            <img src="https://placehold.jp/ffffff/ffffff/20x20.png" alt="電話アイコン">
+            <span class="footer_tel_num">0244-36-3582</span>
+          </a>
+          <p class="footer_tel_hours">受付時間 平日8:00〜17:30</p>
+        </div>
+      </div>
+      <nav class="footer_nav" aria-label="フッターナビゲーション">
+        <ul class="footer_nav_list">
+          <li><a href="index.html#news">▶ お知らせ</a></li>
+          <li>
+            <span class="footer_nav_parent">▼ 施設案内</span>
+            <ul class="footer_nav_sub">
+              <li><a href="service.html#dayservice">▶ デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">▶ 入浴サービス</a></li>
+              <li><a href="service.html#flow">▶ 1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="#">▶ 会社概要</a></li>
+          <li><a href="./recruit.html">▶ 求人情報</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer_copy">
+      <p>©デイサービス 友遊</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav_toggle');
+    const header = document.querySelector('.top_header');
+    function toggleMenu() { header.classList.toggle('open'); }
+    toggle.addEventListener('click', toggleMenu);
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+    document.querySelectorAll('.has_dropdown > a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (window.innerWidth <= 1080) {
+          e.preventDefault();
+          link.parentElement.classList.toggle('active');
+          const dd = link.parentElement.querySelector('.dropdown');
+          if (dd) dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
