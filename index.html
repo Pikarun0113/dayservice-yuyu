@@ -14,6 +14,20 @@
 </head>
 <body>
 
+  <!-- スクロールプログレスバー（JS制御） -->
+  <div id="scroll_progress" aria-hidden="true"></div>
+
+  <!-- ===== スプラッシュ画面 ===== -->
+  <div id="splash" role="status" aria-label="読み込み中">
+    <div class="splash_inner">
+      <div class="splash_mascot" aria-hidden="true">
+        <video src="./images/hikaru.mp4.mp4" autoplay muted playsinline></video>
+      </div>
+      <p class="splash_name">デイサービス 友遊</p>
+      <p class="splash_tagline">住み慣れた地域で、あなたらしい暮らしを</p>
+    </div>
+  </div>
+
   <!-- ===== ヘッダー ===== -->
   <header class="top_header">
     <div class="header_inner">
@@ -33,12 +47,16 @@
         </div>
       </div>
 
-      <!-- 電話番号（1080px以下では非表示） -->
+      <!-- 電話番号ボタン（1080px以下では非表示） -->
       <div class="header_tel">
-        <a href="tel:0244-36-3582">
-          <img src="https://placehold.jp/20x20.png" alt="電話アイコン">
-          <span class="tel_num">0244-36-3582</span>
-          <span class="tel_hours">受付時間 平日8:00〜17:30</span>
+        <a href="tel:0244363582" class="header_tel_btn">
+          <svg class="header_tel_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+          </svg>
+          <span class="header_tel_body">
+            <span class="tel_num">0244-36-3582</span>
+            <span class="tel_hours">受付時間 平日8:00〜17:30</span>
+          </span>
         </a>
       </div>
 
@@ -56,6 +74,8 @@
           </li>
           <li><a href="#news">お知らせ</a></li>
           <li><a href="./index.html#company">会社概要</a></li>
+          <li><a href="./flow.html">1日の流れ</a></li>
+          <li><a href="#contact" class="nav_contact_btn">お問い合わせ</a></li>
           <li><a href="./recruit.html" class="nav_recruit_btn">求人情報</a></li>
         </ul>
       </nav>
@@ -72,16 +92,22 @@
         <li>
           <img class="img_pc" src="./images/building.jpg" alt="施設外観">
           <img class="img_sp" src="./images/building.jpg" alt="施設外観">
-          <h2>住み慣れた地域で、<br>あなたらしい暮らしを</h2>
-          <a href="./service.html" class="mv_link">詳しくはこちら</a>
+          <div class="mv_text_panel">
+            <h2>デイサービス 友遊</h2>
+            <p class="mv_catchphrase">住み慣れた地域で、<br>あなたらしい暮らしを</p>
+            <a href="./service.html" class="mv_link">詳しくはこちら</a>
+          </div>
         </li>
 
         <!-- スライド 2 -->
         <li>
           <img class="img_pc" src="./images/room.jpg" alt="室内">
           <img class="img_sp" src="./images/room.jpg" alt="室内">
-          <h2>笑顔があふれる、<br>憩いの場所</h2>
-          <a href="./service.html" class="mv_link">詳しくはこちら</a>
+          <div class="mv_text_panel">
+            <h2>デイサービス 友遊</h2>
+            <p class="mv_catchphrase">笑顔があふれる、<br>憩いの場所</p>
+            <a href="./service.html" class="mv_link">詳しくはこちら</a>
+          </div>
         </li>
 
       </ul>
@@ -89,53 +115,286 @@
     <div class="top_mv_bottom"></div>
   </section>
 
-  <!-- ===== 施設・サービス一覧 ===== -->
+  <!-- ===== 事業内容 ===== -->
   <section class="top_service_area">
-    <ul class="top_service_list">
+    <div class="svc_section_inner">
 
-      <!-- カード 1：そうま介護センター -->
-      <li class="top_service_item">
-        <a href="./service.html#dayservice">
-          <div class="top_service_kv">
-            <img src="./images/logo_yotsuba.png" alt="デイサービス 友遊">
-            <h3>デイサービス 友遊</h3>
-          </div>
-          <div class="top_service_txt">
-            <p>地域の皆さまに安心・安全な介護サービスを提供します。</p>
-            <span class="more_btn">詳しくはこちら</span>
-          </div>
-        </a>
-      </li>
+      <p class="section_sub_label">Service</p>
+      <h2 class="section_main_heading">事業内容</h2>
 
-      <!-- カード 2：入浴サービス -->
-      <li class="top_service_item">
-        <a href="./service.html#bathing">
-          <div class="top_service_kv">
-            <img src="./images/room.jpg" alt="入浴サービス">
-            <h3>入浴サービス</h3>
-          </div>
-          <div class="top_service_txt">
-            <p>専門スタッフが丁寧にサポートする入浴支援です。</p>
-            <span class="more_btn">詳しくはこちら</span>
-          </div>
-        </a>
-      </li>
+      <ul class="svc_grid">
 
-      <!-- カード 3：サロン -->
-      <li class="top_service_item">
-        <a href="./service.html#flow">
-          <div class="top_service_kv">
-            <img src="./images/bg.png" alt="ほっとサロン">
-            <h3>ほっとサロン</h3>
-          </div>
-          <div class="top_service_txt">
-            <p>ご利用者様がほっとくつろげる憩いの場所です。</p>
-            <span class="more_btn">詳しくはこちら</span>
-          </div>
-        </a>
-      </li>
+        <!-- カード1：居宅介護支援 -->
+        <li class="svc_card svc_card--care fade-up">
+          <a href="service.html#service1" class="svc_card_link">
+            <div class="svc_card_img">
+              <img src="./images/service1.jpg" alt="居宅介護支援事業所 友遊 外観">
+            </div>
+            <div class="svc_card_body">
+              <div class="svc_card_head">
+                <div class="svc_icon_wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                  </svg>
+                </div>
+                <h3 class="svc_title">居宅介護支援（ケアマネージャー）<br>事業所 友遊</h3>
+              </div>
+              <span class="svc_card_more">詳細を見る →</span>
+            </div>
+          </a>
+        </li>
 
-    </ul>
+        <!-- カード2：デイサービス 友遊 -->
+        <li class="svc_card svc_card--day1 fade-up">
+          <a href="service.html#service2" class="svc_card_link">
+            <div class="svc_card_img">
+              <img src="./images/service2.jpg" alt="デイサービス 友遊 施設外観">
+            </div>
+            <div class="svc_card_body">
+              <div class="svc_card_head">
+                <div class="svc_icon_wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                  </svg>
+                </div>
+                <h3 class="svc_title">デイサービス 友遊<br><span class="svc_capacity">利用定員15名</span></h3>
+              </div>
+              <span class="svc_card_more">詳細を見る →</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- カード3：デイサービス 友遊Ⅱ -->
+        <li class="svc_card svc_card--day2 fade-up">
+          <a href="service.html#service3" class="svc_card_link">
+            <div class="svc_card_img">
+              <img src="./images/service3.jpg" alt="デイサービス 友遊Ⅱ 施設外観">
+            </div>
+            <div class="svc_card_body">
+              <div class="svc_card_head">
+                <div class="svc_icon_wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17 11H7V9l-4 3 4 3v-2h10v2l4-3-4-3v2zm-5-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  </svg>
+                </div>
+                <h3 class="svc_title">デイサービス 友遊Ⅱ<br><span class="svc_capacity">利用定員18名</span></h3>
+              </div>
+              <span class="svc_card_more">詳細を見る →</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- カード4：訪問介護 -->
+        <li class="svc_card svc_card--visit fade-up">
+          <a href="service.html#service4" class="svc_card_link">
+            <div class="svc_card_img">
+              <img src="./images/service4.jpg" alt="訪問介護サービス 友遊 スタッフ">
+            </div>
+            <div class="svc_card_body">
+              <div class="svc_card_head">
+                <div class="svc_icon_wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                  </svg>
+                </div>
+                <h3 class="svc_title">訪問介護サービス 友遊</h3>
+              </div>
+              <span class="svc_card_more">詳細を見る →</span>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+
+      <p class="svc_note">その他、<strong>介護タクシー 友遊</strong>も運行しております。</p>
+
+    </div>
+  </section>
+
+  <!-- ===== 友遊が選ばれる3つの理由 ===== -->
+  <section class="top_reasons_area">
+    <div class="top_reasons_inner">
+      <p class="section_sub_label">Why Choose Us</p>
+      <h2 class="section_main_heading">友遊が選ばれる3つの理由</h2>
+
+      <ol class="reasons_list">
+
+        <li class="reasons_item fade-up">
+          <div class="reasons_num" aria-hidden="true">01</div>
+          <div class="reasons_body">
+            <button class="reasons_header" aria-expanded="true">
+              <h3>目が行き届く、少人数制のあたたかさ</h3>
+              <span class="reasons_toggle_icon" aria-hidden="true">－</span>
+            </button>
+            <div class="reasons_content is-open" aria-hidden="false" style="display: block;">
+              <p>定員15名の小規模施設だからこそ、スタッフひとりひとりがご利用者様の顔と名前、体調の変化を把握できます。施設の「大きさ」ではなく、<strong>人の手のぬくもり</strong>を大切にしています。</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="reasons_item fade-up">
+          <div class="reasons_num" aria-hidden="true">02</div>
+          <div class="reasons_body">
+            <button class="reasons_header" aria-expanded="false">
+              <h3>週5日の柔軟な受け入れで、生活リズムをサポート</h3>
+              <span class="reasons_toggle_icon" aria-hidden="true">＋</span>
+            </button>
+            <div class="reasons_content" aria-hidden="true">
+              <p>週1日から週5日まで、ご家族の介護状況やご本人のペースに合わせて利用日数を設定できます。<strong>無理なく通い続けられる環境</strong>をご家族とともに作ります。</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="reasons_item fade-up">
+          <div class="reasons_num" aria-hidden="true">03</div>
+          <div class="reasons_body">
+            <button class="reasons_header" aria-expanded="false">
+              <h3>たっぷり9時間、日中を丸ごとお預かり</h3>
+              <span class="reasons_toggle_icon" aria-hidden="true">＋</span>
+            </button>
+            <div class="reasons_content" aria-hidden="true">
+              <p>朝の送迎から夕方のお見送りまで、最大9時間お預かりします。ご家族が安心して仕事や休息をとれるよう、<strong>日中の生活全体をサポート</strong>します。</p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 1日の流れ（ダイジェスト） ===== -->
+  <section class="top_flow_digest_area">
+    <div class="top_flow_digest_inner fade-up">
+
+      <p class="section_sub_label">Daily Schedule</p>
+      <h2 class="section_main_heading">友遊での1日の流れ</h2>
+
+      <div class="flow_digest_wrap">
+        <div class="flow_digest_img">
+          <img src="./images/room.jpg" alt="デイサービス 友遊 室内の様子">
+        </div>
+        <div class="flow_digest_text">
+          <p>朝8:30のお迎えから夕方16:00のお見送りまで、最大9時間。<br>
+          体操・入浴・昼食・おやつ・レクリエーションと充実したスケジュールで、<br>
+          毎日を楽しく、安心してお過ごしいただけます。</p>
+          <a href="./flow.html" class="more_btn">1日の流れを詳しく見る</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== よくあるご質問（FAQ） ===== -->
+  <section class="top_faq_area">
+    <div class="top_faq_inner">
+      <p class="section_sub_label">FAQ</p>
+      <h2 class="section_main_heading">よくあるご質問</h2>
+
+      <div class="faq_list">
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_1">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">初めて利用する場合、どんな手続きが必要ですか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_1" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>まずはお電話でお気軽にご相談ください。担当のケアマネジャーがいらっしゃる場合は、一緒にご相談いただくとスムーズです。施設見学も随時受け付けております。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_2">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">送迎はありますか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_2" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>はい、ご自宅までお迎えとお見送りをいたします。送迎の対応エリアや時間帯については、お気軽にお電話にてお問い合わせください。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_3">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">週に何日から利用できますか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_3" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>週1日から週5日まで、ご利用者様のペースやご家族の状況に合わせて柔軟に対応しています。担当ケアマネジャーと相談しながら、最適な利用日数をご提案します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_4">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">料金はどのくらいかかりますか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_4" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>介護保険が適用されますので、ご利用者様の要介護度によって自己負担額（1〜3割）が異なります。詳しい料金についてはお電話にてご案内いたします。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_5">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">認知症の方でも利用できますか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_5" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>はい、認知症の方もご利用いただけます。経験豊富なスタッフが、ひとりひとりの状態に合わせて丁寧にサポートいたします。まずはお気軽にご相談ください。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq_item fade-up">
+          <button class="faq_question" aria-expanded="false" aria-controls="faq_ans_6">
+            <span class="faq_q_icon" aria-hidden="true">Q</span>
+            <span class="faq_q_text">入浴サービスは毎回利用できますか？</span>
+            <span class="faq_toggle_icon" aria-hidden="true">＋</span>
+          </button>
+          <div class="faq_answer" id="faq_ans_6" aria-hidden="true">
+            <div class="faq_answer_inner">
+              <div class="faq_answer_body">
+                <span class="faq_a_icon" aria-hidden="true">A</span>
+                <p>入浴サービスはご利用日数に応じてご案内しております。ご自宅での入浴が難しい方でも、安全・清潔に入浴いただけるよう、専門スタッフが個別に対応します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="faq_contact_cta fade-up">
+        <p>他にもご不明な点がございましたら、お気軽にお電話ください。</p>
+        <a href="tel:0244-36-3582" class="more_btn">📞 0244-36-3582</a>
+      </div>
+    </div>
   </section>
 
   <!-- ===== お知らせ ===== -->
@@ -144,42 +403,17 @@
 
       <h3>News</h3>
 
-      <!-- ニュースアイテム 1 -->
-      <dl>
-        <dt>
-          <span class="date">2026.04.01</span>
-          <span class="cat">お知らせ</span>
-        </dt>
-        <dd>
-          <a href="./notice1.html">身体拘束排除・個人情報の取り扱い・相談苦情対応についてのご案内</a>
-        </dd>
-      </dl>
-
-      <!-- ニュースアイテム 2 -->
-      <dl>
-        <dt>
-          <span class="date">2026.03.15</span>
-          <span class="cat">お知らせ</span>
-        </dt>
-        <dd>
-          <a href="./notice2.html">理念・運営方針・施設概要・利用料金についてのご案内</a>
-        </dd>
-      </dl>
-
-      <!-- ニュースアイテム 3 -->
-      <dl>
-        <dt>
-          <span class="date">2026.02.10</span>
-          <span class="cat">お知らせ</span>
-        </dt>
-        <dd>
-          <a href="./notice2.html">施設案内ページの内容を更新いたしました</a>
-        </dd>
-      </dl>
+      <!-- JS で最新3件が挿入される -->
+      <div id="top_news_list" aria-busy="true">
+        <div class="news_loading">
+          <span class="news_loading_dot"></span>
+          最新情報を読み込んでいます...
+        </div>
+      </div>
 
       <!-- 一覧ボタン -->
       <div class="more_btn_wrap">
-        <a href="#news" class="more_btn">一覧を見る</a>
+        <a href="./news.html" class="more_btn">お知らせ一覧を見る</a>
       </div>
 
     </div>
@@ -187,7 +421,7 @@
 
   <!-- ===== 会社概要 ===== -->
   <section class="top_company_area" id="company">
-    <div class="top_company_wrap">
+    <div class="top_company_wrap fade-up">
       <h3>会社概要</h3>
       <table class="company_table">
         <tr>
@@ -217,6 +451,87 @@
           </td>
         </tr>
       </table>
+    </div>
+  </section>
+
+  <!-- ===== お問い合わせ ===== -->
+  <section class="top_contact_area" id="contact">
+    <div class="top_contact_inner fade-up">
+
+      <!-- アコーディオン見出し（クリックで開閉） -->
+      <button class="contact_accordion_header" aria-expanded="false" aria-controls="contact_form_body">
+        <div class="contact_accordion_label">
+          <p class="section_sub_label">Contact</p>
+          <h2 class="section_main_heading">お問い合わせ</h2>
+          <p class="contact_lead">見学・ご相談など、どんな小さなことでもお気軽にどうぞ。<br>担当スタッフが丁寧にご対応いたします。</p>
+        </div>
+        <span class="contact_accordion_icon" aria-hidden="true">＋</span>
+      </button>
+
+      <!-- フォーム本体（初期非表示） -->
+      <div id="contact_form_body" class="contact_accordion_body" aria-hidden="true">
+
+        <form id="contactForm" novalidate>
+
+          <div class="contact_fields_row">
+
+            <div class="contact_field">
+              <label for="contact_name">お名前 <span class="contact_required">必須</span></label>
+              <input type="text" id="contact_name" name="name"
+                     placeholder="山田 太郎" required autocomplete="name">
+            </div>
+
+            <div class="contact_field">
+              <label for="contact_kana">フリガナ</label>
+              <input type="text" id="contact_kana" name="kana"
+                     placeholder="ヤマダ タロウ" autocomplete="name">
+            </div>
+
+          </div>
+
+          <div class="contact_fields_row">
+
+            <div class="contact_field">
+              <label for="contact_phone">電話番号</label>
+              <input type="tel" id="contact_phone" name="phone"
+                     placeholder="0244-36-3582" autocomplete="tel">
+            </div>
+
+            <div class="contact_field">
+              <label for="contact_email">メールアドレス <span class="contact_required">必須</span></label>
+              <input type="email" id="contact_email" name="email"
+                     placeholder="example@example.com" required autocomplete="email">
+            </div>
+
+          </div>
+
+          <div class="contact_field">
+            <label for="contact_message">お問い合わせ内容 <span class="contact_required">必須</span></label>
+            <textarea id="contact_message" name="message"
+                      rows="6" placeholder="例：施設の見学を希望しています。" required></textarea>
+          </div>
+
+          <div class="contact_submit">
+            <button type="submit" class="more_btn" id="contact_submit_btn">送信する</button>
+          </div>
+
+        </form>
+
+        <!-- 送信完了メッセージ（JS で表示） -->
+        <div class="contact_success" id="contact_success" role="alert" aria-live="assertive" hidden>
+          <div class="contact_success_inner">
+            <span class="contact_success_icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/>
+              </svg>
+            </span>
+            <p class="contact_success_title">お問い合わせを受け付けました</p>
+            <p class="contact_success_body">担当者からの連絡をお待ちください。<br>通常1〜2営業日以内にご連絡いたします。</p>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </section>
 
@@ -275,6 +590,21 @@
 
   </footer>
 
+  <!-- ===== アクセシビリティパネル ===== -->
+  <div id="a11y_panel" role="group" aria-label="アクセシビリティ設定">
+    <button class="a11y_btn" id="btn_a11y_large" aria-pressed="false" title="文字を大きくする">
+      <span class="a11y_icon" aria-hidden="true">A+</span>
+      <span class="a11y_label">文字拡大</span>
+    </button>
+    <button class="a11y_btn" id="btn_a11y_contrast" aria-pressed="false" title="高コントラスト表示に切り替える">
+      <span class="a11y_icon" aria-hidden="true">◑</span>
+      <span class="a11y_label">配色変更</span>
+    </button>
+  </div>
+
+  <!-- サイト共通設定（GAS URL など） -->
+  <script src="./config.js"></script>
+
   <!-- jQuery + bxSlider -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.bxslider/dist/jquery.bxslider.min.js"></script>
@@ -321,7 +651,569 @@
         }
       });
     });
+
+    // =============================================
+    // 【1】スプラッシュ画面（sessionStorage でスキップ制御）
+    // 同一セッション内の2回目以降はスプラッシュをスキップ
+    // =============================================
+    window.addEventListener('load', function () {
+      const splash = document.getElementById('splash');
+      if (!splash) return;
+
+      // セッション内で既に訪問済みなら即削除してスキップ
+      if (sessionStorage.getItem('visited')) {
+        splash.remove();
+        return;
+      }
+
+      // 初回のみ 1.7s → フェードアウト → DOM 削除 → visited セット
+      setTimeout(function () {
+        splash.classList.add('is-hidden');
+        splash.addEventListener('transitionend', function () {
+          splash.remove();
+          sessionStorage.setItem('visited', 'true');
+        }, { once: true });
+      }, 1700);
+    });
+
+    // =============================================
+    // 【2】スクロール連動 fade-up アニメーション
+    // IntersectionObserver で .is-visible を付与
+    // =============================================
+    (function () {
+      const targets = document.querySelectorAll('.fade-up');
+      if (!targets.length || !window.IntersectionObserver) {
+        // Observer 非対応ブラウザはすべて即表示
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target); // 一度だけ発火
+          }
+        });
+      }, { threshold: 0.12 });
+      targets.forEach(function (el) { observer.observe(el); });
+    }());
+
+    // =============================================
+    // 【3】アクセシビリティ：文字拡大 / 配色変更
+    // body と html 両方にクラスをトグルする
+    // =============================================
+    (function () {
+      const btnLarge    = document.getElementById('btn_a11y_large');
+      const btnContrast = document.getElementById('btn_a11y_contrast');
+
+      function toggleA11y(btn, bodyClass, htmlClass) {
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          const isActive = document.body.classList.toggle(bodyClass);
+          // rem ベースのフォントサイズ変更は html に付与
+          if (htmlClass) document.documentElement.classList.toggle(htmlClass, isActive);
+          this.setAttribute('aria-pressed', String(isActive));
+          this.classList.toggle('is-active', isActive);
+        });
+      }
+
+      toggleA11y(btnLarge,    'a11y-large',    'a11y-large');
+      toggleA11y(btnContrast, 'a11y-contrast', null);
+    }());
+
+    // =============================================
+    // 【4】スクロールプログレスバー
+    // スクロール量に応じて #scroll_progress の幅を更新
+    // =============================================
+    (function () {
+      const bar = document.getElementById('scroll_progress');
+      if (!bar) return;
+
+      function updateBar() {
+        const scrolled  = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrolled / docHeight * 100) : 0;
+        bar.style.width = pct + '%';
+      }
+
+      window.addEventListener('scroll', updateBar, { passive: true });
+      updateBar(); // 初期位置
+    }());
+
+    // =============================================
+    // 【5】数字カウントアップ（IntersectionObserver）
+    // .js-count[data-target="N"] が視野に入ったら 0→N アニメ
+    // =============================================
+    (function () {
+      const counters = document.querySelectorAll('.js-count');
+      if (!counters.length) return;
+
+      // IntersectionObserver 非対応環境では即表示
+      if (!window.IntersectionObserver) {
+        counters.forEach(function (el) {
+          el.textContent = el.dataset.target;
+        });
+        return;
+      }
+
+      function animateCount(el) {
+        const target   = parseInt(el.dataset.target, 10);
+        const duration = Math.max(800, target * 60); // 数値に応じた尺（最短 800ms）
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed  = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // easeOutQuart: 滑らかな減速
+          const ease = 1 - Math.pow(1 - progress, 4);
+          el.textContent = Math.round(ease * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      const countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target); // 一度だけ
+          }
+        });
+      }, { threshold: 0.6 });
+
+      counters.forEach(function (el) { countObserver.observe(el); });
+    }());
+
+    // =============================================
+    // 【理由】アコーディオン開閉
+    // .reasons_header クリックでコンテンツを展開・折りたたむ
+    // =============================================
+    (function () {
+      document.querySelectorAll('.reasons_header').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          var content = btn.closest('.reasons_body').querySelector('.reasons_content');
+          var icon    = btn.querySelector('.reasons_toggle_icon');
+
+          btn.setAttribute('aria-expanded', String(!isExpanded));
+          content.classList.toggle('is-open', !isExpanded);
+          content.setAttribute('aria-hidden', String(isExpanded));
+          icon.textContent = isExpanded ? '＋' : '－';
+        });
+      });
+    }());
+
+    // =============================================
+    // 【FAQ】アコーディオン開閉
+    // .faq_question クリックで回答エリアを展開・折りたたむ
+    // =============================================
+    (function () {
+      document.querySelectorAll('.faq_question').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          var item   = btn.closest('.faq_item');
+          var answer = item.querySelector('.faq_answer');
+          var icon   = btn.querySelector('.faq_toggle_icon');
+
+          // 状態を反転
+          btn.setAttribute('aria-expanded', String(!isExpanded));
+          answer.classList.toggle('is-open', !isExpanded);
+          answer.setAttribute('aria-hidden', String(isExpanded));
+
+          // ＋ ↔ － のテキスト切り替え（CSS rotate との二重演出を避けるため）
+          icon.textContent = isExpanded ? '＋' : '－';
+        });
+      });
+    }());
+
+    // =============================================
+    // 【お問い合わせ】アコーディオン開閉
+    // .contact_accordion_header クリックで展開 / 折りたたみ
+    // ナビの「お問い合わせ」クリック時は自動展開 + スクロール
+    // =============================================
+    (function () {
+      var accHeader = document.querySelector('.contact_accordion_header');
+      var accBody   = document.getElementById('contact_form_body');
+      if (!accHeader || !accBody) return;
+
+      /* 開く */
+      function openContact() {
+        accHeader.setAttribute('aria-expanded', 'true');
+        accBody.classList.add('is-open');
+        accBody.setAttribute('aria-hidden', 'false');
+        accHeader.querySelector('.contact_accordion_icon').textContent = '－';
+      }
+
+      /* 閉じる */
+      function closeContact() {
+        accHeader.setAttribute('aria-expanded', 'false');
+        accBody.classList.remove('is-open');
+        accBody.setAttribute('aria-hidden', 'true');
+        accHeader.querySelector('.contact_accordion_icon').textContent = '＋';
+      }
+
+      /* 見出しクリック → トグル */
+      accHeader.addEventListener('click', function () {
+        if (accHeader.getAttribute('aria-expanded') === 'true') {
+          closeContact();
+        } else {
+          openContact();
+        }
+      });
+
+      /* ナビ「お問い合わせ」クリック → スクロール後に自動展開 */
+      document.querySelectorAll('a[href="#contact"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault(); // ブラウザデフォルトのアンカー遷移を抑止
+          // ハンバーガーメニューを閉じる
+          var hdr = document.querySelector('.top_header');
+          if (hdr) hdr.classList.remove('open');
+          // ヘッダー高さ分オフセットしてスムーススクロール
+          var section = document.getElementById('contact');
+          if (section) {
+            var offset = 86;
+            var top = section.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+          // 350ms 後にアコーディオンを開く
+          setTimeout(openContact, 350);
+        });
+      });
+    }());
+
+    // =============================================
+    // 【6】メインビジュアル パララックス
+    // スクロールに応じてスライド画像をゆっくり移動（PC のみ）
+    // =============================================
+    (function () {
+      const mvArea = document.querySelector('.top_mv_area');
+      const imgs   = document.querySelectorAll('.top_mv_area .slide li img');
+      if (!mvArea || !imgs.length) return;
+
+      function updateParallax() {
+        // モバイルは負荷・UXを考慮して無効
+        if (window.innerWidth < 768) return;
+
+        const scrollY   = window.scrollY;
+        const mvBottom  = mvArea.offsetTop + mvArea.offsetHeight;
+        if (scrollY > mvBottom) return; // MV が画面外に出たら処理をスキップ
+
+        // スクロールの 0.18 倍だけ画像を下にずらす（最大 55px）
+        const offset = Math.min(scrollY * 0.18, 55);
+        imgs.forEach(function (img) {
+          img.style.transform = 'translateY(' + offset + 'px)';
+        });
+      }
+
+      window.addEventListener('scroll', updateParallax, { passive: true });
+    }());
+
+    // =============================================
+    // 【お問い合わせ】フォーム送信 → GAS（非同期・ページ内フィードバック）
+    // =============================================
+    (function () {
+      var form      = document.getElementById('contactForm');
+      var submitBtn = document.getElementById('contact_submit_btn');
+      var successEl = document.getElementById('contact_success');
+      if (!form || !submitBtn || !successEl) return;
+
+      var ENDPOINT = CONFIG.GAS_FORM_URL;
+
+      /* ── バリデーション（必須チェック） ── */
+      function validate() {
+        var ok = true;
+        form.querySelectorAll('[required]').forEach(function (el) {
+          el.classList.remove('contact_input_error');
+          if (!el.value.trim()) {
+            el.classList.add('contact_input_error');
+            ok = false;
+          }
+        });
+        return ok;
+      }
+
+      /* ── 送信ボタン状態 ── */
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        submitBtn.textContent = loading ? '送信中...' : '送信する';
+        submitBtn.classList.toggle('is-loading', loading);
+      }
+
+      /* ── 成功表示 ── */
+      function showSuccess() {
+        form.style.display = 'none';
+        successEl.hidden = false;
+        /* フェードイン：hidden 解除後1フレーム待って is-visible を付与 */
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            successEl.classList.add('is-visible');
+          });
+        });
+        /* アコーディオンパネルが閉じていれば自動スクロール */
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        /* ひかるくんお祝い演出 */
+        if (typeof window.hikaruCelebrate === 'function') {
+          window.hikaruCelebrate();
+        }
+      }
+
+      /* ── submit イベント ── */
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!validate()) {
+          /* 最初のエラーフィールドにフォーカス */
+          var first = form.querySelector('.contact_input_error');
+          if (first) first.focus();
+          return;
+        }
+
+        setLoading(true);
+
+        /* URLSearchParams で x-www-form-urlencoded に変換して POST */
+        var params = new URLSearchParams(new FormData(form));
+
+        fetch(ENDPOINT, {
+          method : 'POST',
+          mode   : 'no-cors',           /* GAS は CORS ヘッダーを返さないため */
+          body   : params
+        })
+        .then(function () {
+          /* no-cors では opaque レスポンス。then() 到達 ＝ ネットワーク送信完了 */
+          form.reset();
+          showSuccess();
+        })
+        .catch(function (err) {
+          console.error('[Contact] 送信エラー:', err);
+          alert('送信中にエラーが発生しました。\nお電話でもお問い合わせいただけます：0244-36-3582');
+        })
+        .finally(function () {
+          setLoading(false);
+        });
+      });
+
+      /* ── エラースタイルをリアルタイムで解除 ── */
+      form.querySelectorAll('[required]').forEach(function (el) {
+        el.addEventListener('input', function () {
+          if (el.value.trim()) el.classList.remove('contact_input_error');
+        });
+      });
+
+    }());
+
+    // =============================================
+    // 【お知らせ】GAS からニュースを取得してトップ3件表示
+    // スプレッドシート列：A=日付 / B=カテゴリ / C=タイトル / D=本文
+    // =============================================
+    (function () {
+
+      var GAS_NEWS_URL = CONFIG.GAS_API_URL;
+
+      var container = document.getElementById('top_news_list');
+      if (!container) return;
+
+      // HTML エスケープ
+      function esc(str) {
+        return String(str)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      // ニュースカード（アコーディオン）を生成
+      function createCard(item, index) {
+        var id       = 'top_news_body_' + index;
+        var date     = item.date     || '';
+        var category = item.category || '';
+        var title    = item.title    || '（タイトルなし）';
+        var body     = item.content  || '';
+
+        var bodyHtml = body
+          ? body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/\n/g, '<br>')
+          : '<em>（本文なし）</em>';
+
+        var card = document.createElement('article');
+        card.className = 'news_card';
+        card.innerHTML =
+          '<button class="news_card_header" aria-expanded="false" aria-controls="' + id + '">' +
+            '<span class="news_card_meta">' +
+              '<span class="date">' + esc(date) + '</span>' +
+              (category ? '<span class="cat">' + esc(category) + '</span>' : '') +
+            '</span>' +
+            '<span class="news_card_title">' + esc(title) + '</span>' +
+            '<span class="news_card_icon" aria-hidden="true">＋</span>' +
+          '</button>' +
+          '<div id="' + id + '" class="news_card_body" aria-hidden="true">' +
+            '<div class="news_card_body_inner"><p>' + bodyHtml + '</p></div>' +
+          '</div>';
+
+        var btn  = card.querySelector('.news_card_header');
+        var bodyEl = card.querySelector('.news_card_body');
+        var icon = card.querySelector('.news_card_icon');
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          bodyEl.classList.toggle('is-open', !expanded);
+          bodyEl.setAttribute('aria-hidden', String(expanded));
+          icon.textContent = expanded ? '＋' : '－';
+        });
+
+        return card;
+      }
+
+      console.log('[News/TOP] fetch 開始 URL:', GAS_NEWS_URL);
+
+      fetch(GAS_NEWS_URL, { redirect: 'follow' })
+        .then(function (res) {
+          console.log('[News/TOP] レスポンス status:', res.status, '/ ok:', res.ok, '/ url:', res.url);
+          if (!res.ok) throw new Error('HTTP ステータス ' + res.status + ' (' + res.url + ')');
+          return res.json();
+        })
+        .then(function (data) {
+          console.log('[News/TOP] 取得データ:', data);
+          container.setAttribute('aria-busy', 'false');
+          container.innerHTML = '';
+
+          if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML =
+              '<p class="news_empty">現在、新しいお知らせはありません。</p>';
+            return;
+          }
+
+          // 最新3件のみ表示
+          var frag = document.createDocumentFragment();
+          data.slice(0, 3).forEach(function (item, i) {
+            frag.appendChild(createCard(item, i));
+          });
+          container.appendChild(frag);
+        })
+        .catch(function (err) {
+          console.error('[News/TOP] 取得エラー種別:', err.name);
+          console.error('[News/TOP] 取得エラー内容:', err.message);
+          console.error('[News/TOP] 取得URL:', GAS_NEWS_URL);
+          console.error('[News/TOP] エラーオブジェクト全体:', err);
+
+          var hint = err.name === 'TypeError'
+            ? '（CORSポリシーまたはネットワーク接続の問題の可能性があります）'
+            : '';
+
+          container.setAttribute('aria-busy', 'false');
+          container.innerHTML =
+            '<p class="news_error">' +
+              '【読み込みエラー】' + String(err.name) + ': ' + String(err.message) + '<br>' +
+              hint +
+              '<br><small>取得先: ' + String(GAS_NEWS_URL) + '</small>' +
+            '</p>';
+        });
+
+    }());
   </script>
+
+  <!-- ===== ひかるくんマスコット HTML ===== -->
+  <div id="hikaruMascot" aria-hidden="true">
+    <div id="hikaruBubble" role="status"></div>
+    <a href="hikaru.html" id="hikaruLink" target="_blank" rel="noopener noreferrer"
+       aria-label="ひかるくんのへや（別タブで開きます）" aria-hidden="false">
+      <video id="hikaruImg" src="images/hikaru_dance.mp4"
+             autoplay muted loop playsinline
+             poster="images/hikaru_dance.mp4"></video>
+    </a>
+  </div>
+
+  <!-- ===== ひかるくんマスコット JS ===== -->
+  <script>
+  (function () {
+
+    var mascot = document.getElementById('hikaruMascot');
+    var bubble = document.getElementById('hikaruBubble');
+    var img    = document.getElementById('hikaruImg');
+    if (!mascot || !bubble || !img) return;
+
+    var bubbleTimer  = null;   /* 吹き出し自動非表示タイマー */
+    var patrolDone   = false;  /* パトロール実行済みフラグ（1回制限） */
+
+    /* ── 吹き出し表示 ────────────────────── */
+    function showBubble(text, duration) {
+      clearTimeout(bubbleTimer);
+      bubble.textContent = text;
+      bubble.classList.add('is-visible');
+      if (duration) {
+        bubbleTimer = setTimeout(hideBubble, duration);
+      }
+    }
+
+    function hideBubble() {
+      clearTimeout(bubbleTimer);
+      bubble.classList.remove('is-visible');
+    }
+
+    /* ── 機能1：時間帯挨拶 ───────────────── */
+    function showGreeting() {
+      var h = new Date().getHours();
+      var msg;
+      if (h >= 6 && h < 12) {
+        msg = 'おはようございます！\n今日も元気に営業中です🍀';
+      } else if (h >= 12 && h < 18) {
+        msg = 'こんにちは！\nご相談はお気軽にどうぞ🍀';
+      } else {
+        msg = 'こんばんは🌙\n夜間のお問い合わせは\nフォームからお願いします';
+      }
+      showBubble(msg, 4000);
+    }
+
+    /* ── 機能2：お祝い演出（外部公開） ────── */
+    window.hikaruCelebrate = function () {
+      /* ジャンプアニメーション */
+      img.classList.remove('is-jumping');
+      void img.offsetWidth; /* reflow でリセット */
+      img.classList.add('is-jumping');
+      img.addEventListener('animationend', function handler() {
+        img.classList.remove('is-jumping');
+        img.removeEventListener('animationend', handler);
+      });
+      /* 吹き出し（4秒表示） */
+      showBubble('メッセージを送りました！\n担当者に伝えますね🍀', 4000);
+    };
+
+    /* ── 機能3：パトロール ───────────────── */
+    function startPatrol() {
+      if (patrolDone) return;
+      patrolDone = true;
+
+      /* 吹き出しを先に出して 0.8s 後にパトロール開始 */
+      showBubble('一番下まで見てくれてありがとう！🍀');
+      setTimeout(function () {
+        mascot.classList.add('is-patrolling');
+        /* アニメーション終了後にクリーンアップ */
+        mascot.addEventListener('animationend', function handler(e) {
+          if (e.animationName !== 'hikaruPatrol') return;
+          mascot.classList.remove('is-patrolling');
+          mascot.removeEventListener('animationend', handler);
+          hideBubble();
+        });
+      }, 800);
+    }
+
+    /* IntersectionObserver でフッター到達を検知 */
+    var footer = document.querySelector('footer');
+    if (footer && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            startPatrol();
+          }
+        });
+      }, { threshold: 0.15 });
+      io.observe(footer);
+    }
+
+    /* ── 初期挨拶（0.9s 後に表示） ────────── */
+    setTimeout(showGreeting, 900);
+
+  }());
+  </script>
+
 
 </body>
 </html>

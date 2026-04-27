@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 ページが見つかりません | デイサービス 友遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #2d4a0e;
+    }
+
+    /* ============================================================
+       BACKGROUND
+    ============================================================ */
+    .page_bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(
+        160deg,
+        #e8f6ff 0%,
+        #d4f0e8 35%,
+        #e6f8d0 65%,
+        #f0fae0 100%
+      );
+      background-size: 200% 200%;
+      animation: bgBreath 12s ease-in-out infinite alternate;
+    }
+    @keyframes bgBreath {
+      0%   { background-position: 0%   0%;   }
+      100% { background-position: 100% 100%; }
+    }
+    .page_bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(200,240,220,0.4) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       FLOATING LEAVES
+    ============================================================ */
+    .leaf {
+      position: fixed;
+      top: -40px;
+      font-size: var(--sz, 1.4rem);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.7;
+      animation: leafFall var(--dur) ease-in var(--delay) infinite;
+    }
+    @keyframes leafFall {
+      0%   { transform: translateY(0)     translateX(0)                       rotate(0deg);   opacity: 0.7; }
+      30%  { transform: translateY(30vh)  translateX(var(--wx))               rotate(120deg); opacity: 0.7; }
+      70%  { transform: translateY(70vh)  translateX(calc(var(--wx) * -0.5))  rotate(260deg); opacity: 0.5; }
+      100% { transform: translateY(110vh) translateX(var(--wx2))              rotate(360deg); opacity: 0;   }
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .page_wrap {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 80px;
+    }
+
+    /* ============================================================
+       CARD
+    ============================================================ */
+    .error_card {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 32px;
+      border: 1.5px solid rgba(255, 255, 255, 0.75);
+      box-shadow:
+        0 8px 48px rgba(80, 160, 80, 0.10),
+        0 2px 0 rgba(255, 255, 255, 0.8) inset;
+      padding: 52px 48px 48px;
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+      animation: cardIn 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(32px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+
+    /* ── 動画エリア ── */
+    .hikaru_area {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hikaru_video {
+      width: clamp(130px, 22vw, 210px);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.18));
+      display: block;
+      animation: hikaruSorry 4.2s ease-in-out infinite;
+    }
+    @keyframes hikaruSorry {
+      0%,100% { transform: translateY(0)    rotate(0deg);  }
+      30%     { transform: translateY(-9px) rotate(-3deg); }
+      65%     { transform: translateY(4px)  rotate(2deg);  }
+    }
+
+    .hikaru_caption {
+      font-size: 0.80rem;
+      font-weight: 700;
+      color: #5aad30;
+      letter-spacing: 0.06em;
+      text-align: center;
+      min-height: 1.4em;
+      transition: opacity 0.4s;
+    }
+
+    /* ── テキストエリア ── */
+    .error_body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .error_num {
+      font-size: clamp(4.2rem, 11vw, 7.5rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #76b82a;
+      letter-spacing: -0.02em;
+      text-shadow: 0 5px 0 rgba(118, 184, 42, 0.16);
+      margin-bottom: 8px;
+    }
+
+    .error_title {
+      font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+      font-weight: 900;
+      color: #2d4a0e;
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    .error_message {
+      font-size: clamp(0.88rem, 1.8vw, 1.0rem);
+      color: #4a6830;
+      line-height: 1.9;
+      margin-bottom: 34px;
+    }
+
+    /* ── 回復ボタン ── */
+    .home_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #76b82a;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.04rem;
+      font-family: inherit;
+      letter-spacing: 0.04em;
+      padding: 16px 38px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow:
+        0 6px 24px rgba(118, 184, 42, 0.40),
+        0 2px 0 rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform   0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow  0.28s ease,
+        background  0.18s ease;
+    }
+    /* 光沢スライド */
+    .home_btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -110%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transition: left 0.48s ease;
+      pointer-events: none;
+    }
+    .home_btn:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 16px 40px rgba(118, 184, 42, 0.52);
+      background: #5a9620;
+    }
+    .home_btn:hover::before { left: 150%; }
+    .home_btn:active {
+      transform: translateY(-1px) scale(1.01);
+      transition-duration: 0.08s;
+    }
+    .home_btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ── サブリンク ── */
+    .sub_links {
+      margin-top: 16px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .sub_links_label {
+      font-size: 0.78rem;
+      color: #7aaa40;
+      letter-spacing: 0.05em;
+    }
+    .sub_link {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #5a9620;
+      text-decoration: none;
+      border-bottom: 1.5px dashed #5a9620;
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .sub_link:hover { color: #3d7810; border-color: #3d7810; }
+
+    /* ============================================================
+       FOOTER CREDIT
+    ============================================================ */
+    .page_credit {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 0.72rem;
+      color: rgba(60, 90, 20, 0.5);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 640px) {
+      .error_card {
+        flex-direction: column;
+        padding: 40px 24px 36px;
+        gap: 28px;
+        text-align: center;
+        border-radius: 24px;
+      }
+      .sub_links { justify-content: center; }
+      .home_btn  { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 380px) {
+      .error_card { padding: 32px 16px 28px; }
+      .error_num  { font-size: 3.6rem; }
+      .sub_links  { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景 -->
+  <div class="page_bg" aria-hidden="true"></div>
+
+  <!-- ふわふわ葉（雰囲気演出） -->
+  <span class="leaf" aria-hidden="true"
+        style="left:7%;  --sz:1.3rem; --dur:9s;  --delay:0s;    --wx:28px;  --wx2:-18px;">🍀</span>
+  <span class="leaf" aria-hidden="true"
+        style="left:21%; --sz:1.0rem; --dur:13s; --delay:2.5s;  --wx:-24px; --wx2:14px;">🌿</span>
+  <span class="leaf" aria-hidden="true"
+        style="left:44%; --sz:1.5rem; --dur:11s; --delay:4.5s;  --wx:36px;  --wx2:-26px;">🍀</span>
+  <span class="leaf" aria-hidden="true"
+        style="left:67%; --sz:1.1rem; --dur:15s; --delay:1.2s;  --wx:-32px; --wx2:18px;">🌸</span>
+  <span class="leaf" aria-hidden="true"
+        style="left:86%; --sz:1.4rem; --dur:10s; --delay:6s;    --wx:22px;  --wx2:-20px;">🍀</span>
+
+  <!-- メインコンテンツ -->
+  <main class="page_wrap" role="main">
+    <div class="error_card">
+
+      <!-- ひかるくん動画 -->
+      <div class="hikaru_area">
+        <video
+          id="hikaruVid"
+          class="hikaru_video"
+          src="images/hikaru.mp4.mp4"
+          poster="images/hikaru_mascot.png"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-label="申し訳なさそうなひかるくん"
+        ></video>
+        <p class="hikaru_caption" id="hikaruCaption" aria-live="polite">ごめんなさい… 🙏</p>
+      </div>
+
+      <!-- エラーテキスト & ボタン -->
+      <div class="error_body">
+        <div class="error_num" aria-hidden="true">404</div>
+        <h1 class="error_title">ページが見つかりませんでした</h1>
+        <p class="error_message">
+          ひかるくんも一緒に探しましたが、<br>
+          お探しのページは見つからなかったようです…。<br>
+          URLをお確かめいただくか、<br>
+          トップページからもう一度お探しください。
+        </p>
+
+        <a href="index.html" class="home_btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          トップページに戻る
+        </a>
+
+        <div class="sub_links">
+          <span class="sub_links_label">他のページを探す：</span>
+          <a href="service.html"        class="sub_link">サービス案内</a>
+          <a href="index.html#contact"  class="sub_link">お問い合わせ</a>
+          <a href="news.html"           class="sub_link">お知らせ</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <p class="page_credit" aria-hidden="true">デイサービス 友遊</p>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── 動画エラー時：img にフォールバック ── */
+    var vid = document.getElementById('hikaruVid');
+    if (vid) {
+      vid.addEventListener('error', function () {
+        var img       = document.createElement('img');
+        img.src       = 'images/hikaru_mascot.png';
+        img.alt       = '申し訳なさそうなひかるくん';
+        img.className = vid.className;
+        vid.parentNode.replaceChild(img, vid);
+      });
+      /* 自動再生停止への再試行 */
+      vid.addEventListener('suspend', function () {
+        vid.play && vid.play().catch(function () {});
+      });
+    }
+
+    /* ── ひかるくんのひとことをローテーション ── */
+    var MESSAGES = [
+      'ごめんなさい… 🙏',
+      'いっしょに探すよ！🍀',
+      'あれれ？ないな〜😅',
+      'トップに戻ろう！✨',
+      'ひかるくんも迷子…😢',
+      '見つかりますように🌟'
+    ];
+    var caption = document.getElementById('hikaruCaption');
+    if (caption) {
+      var msgIdx = 0;
+      setInterval(function () {
+        caption.style.opacity = '0';
+        setTimeout(function () {
+          msgIdx = (msgIdx + 1) % MESSAGES.length;
+          caption.textContent = MESSAGES[msgIdx];
+          caption.style.opacity = '1';
+        }, 400);
+      }, 3400);
+    }
+
+  })();
+  </script>
+</body>
+</html>

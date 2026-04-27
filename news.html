@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="お知らせ一覧｜デイサービス 友遊">
+  <title>お知らせ | デイサービス 友遊</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="subpage">
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="top_header">
+    <div class="header_inner">
+
+      <h1>
+        <a href="./index.html">デイサービス 友遊</a>
+      </h1>
+
+      <div id="nav_toggle" role="button" tabindex="0" aria-label="メニューを開閉">
+        <div>
+          <span></span>
+          <span></span>
+          <span></span>
+          <p>MENU</p>
+        </div>
+      </div>
+
+      <div class="header_tel">
+        <a href="tel:0244-36-3582">
+          <img src="https://placehold.jp/20x20.png" alt="電話アイコン">
+          <span class="tel_num">0244-36-3582</span>
+          <span class="tel_hours">受付時間 平日8:00〜17:30</span>
+        </a>
+      </div>
+
+      <nav class="top_nav">
+        <ul>
+          <li><a href="./index.html">ホーム</a></li>
+          <li class="has_dropdown">
+            <a href="service.html">施設案内</a>
+            <ul class="dropdown">
+              <li><a href="service.html#dayservice">デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">入浴サービス</a></li>
+              <li><a href="service.html#flow">1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="./index.html#news">お知らせ</a></li>
+          <li><a href="./index.html#company">会社概要</a></li>
+          <li><a href="./flow.html">1日の流れ</a></li>
+          <li><a href="./index.html#contact" class="nav_contact_btn">お問い合わせ</a></li>
+          <li><a href="./recruit.html" class="nav_recruit_btn">求人情報</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ===== メインコンテンツ ===== -->
+  <main>
+
+    <!-- ページタイトル -->
+    <section class="page_title_area">
+      <div class="page_title_inner">
+        <p class="page_title_en">News</p>
+        <h2 class="page_title_ja">お知らせ</h2>
+      </div>
+    </section>
+
+    <!-- ニュース一覧 -->
+    <section class="news_page_area">
+      <div class="news_page_inner">
+
+        <!-- JS でここに挿入される -->
+        <div id="news_list" role="feed" aria-label="お知らせ一覧" aria-busy="true">
+          <div class="news_loading" aria-live="polite">
+            <span class="news_loading_dot"></span>
+            最新情報を読み込んでいます...
+          </div>
+        </div>
+
+        <div class="notice_back_btn" style="margin-top: 48px;">
+          <a href="./index.html" class="more_btn">トップページへ戻る</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="footer_inner">
+
+      <div class="footer_left">
+        <div class="footer_logo">
+          <a href="./index.html">デイサービス 友遊</a>
+        </div>
+        <address class="footer_address">
+          <p>〒976-0036<br>福島県相馬市南飯渕字木関無９３</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=福島県相馬市南飯渕字木関無93" class="footer_map" target="_blank" rel="noopener noreferrer">【Google Map】</a>
+        </address>
+        <div class="footer_tel">
+          <a href="tel:0244-36-3582">
+            <img src="https://placehold.jp/ffffff/ffffff/20x20.png" alt="電話アイコン">
+            <span class="footer_tel_num">0244-36-3582</span>
+          </a>
+          <p class="footer_tel_hours">受付時間 平日8:00〜17:30</p>
+        </div>
+      </div>
+
+      <nav class="footer_nav" aria-label="フッターナビゲーション">
+        <ul class="footer_nav_list">
+          <li><a href="./index.html#news">▶ お知らせ</a></li>
+          <li>
+            <span class="footer_nav_parent">▼ 施設案内</span>
+            <ul class="footer_nav_sub">
+              <li><a href="service.html#dayservice">▶ デイサービス 友遊</a></li>
+              <li><a href="service.html#bathing">▶ 入浴サービス</a></li>
+              <li><a href="service.html#flow">▶ 1日の流れ</a></li>
+            </ul>
+          </li>
+          <li><a href="./index.html#company">▶ 会社概要</a></li>
+          <li><a href="./recruit.html">▶ 求人情報</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <div class="footer_copy">
+      <p>©デイサービス 友遊</p>
+    </div>
+  </footer>
+
+  <!-- サイト共通設定（GAS URL など） -->
+  <script src="./config.js"></script>
+
+  <script>
+    // =============================================
+    // ハンバーガーメニュー / ドロップダウン
+    // =============================================
+    const toggle = document.getElementById('nav_toggle');
+    const headerEl = document.querySelector('.top_header');
+    function toggleMenu() { headerEl.classList.toggle('open'); }
+    toggle.addEventListener('click', toggleMenu);
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+    document.querySelectorAll('.has_dropdown > a').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (window.innerWidth <= 1080) {
+          e.preventDefault();
+          link.parentElement.classList.toggle('active');
+          const dd = link.parentElement.querySelector('.dropdown');
+          if (dd) dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
+
+    // =============================================
+    // GAS からニュースを取得して一覧表示
+    // =============================================
+    (function () {
+
+      var GAS_NEWS_URL = CONFIG.GAS_API_URL;
+
+      var container = document.getElementById('news_list');
+      if (!container) return;
+
+      // ── ニュースカード 1 件分の HTML を生成 ──────────────────────────
+      function createCard(item, index) {
+        var id       = 'news_body_' + index;
+        var date     = item.date     || '';
+        var category = item.category || '';
+        var title    = item.title    || '（タイトルなし）';
+        var body     = item.content  || '';
+
+        var card = document.createElement('article');
+        card.className = 'news_card';
+
+        // 本文をそのまま表示（改行を<br>に変換）
+        var bodyHtml = body
+          ? body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/\n/g, '<br>')
+          : '<em>（本文なし）</em>';
+
+        card.innerHTML =
+          '<button class="news_card_header" aria-expanded="false" aria-controls="' + id + '">' +
+            '<span class="news_card_meta">' +
+              '<span class="date">' + escapeHtml(date) + '</span>' +
+              (category ? '<span class="cat">' + escapeHtml(category) + '</span>' : '') +
+            '</span>' +
+            '<span class="news_card_title">' + escapeHtml(title) + '</span>' +
+            '<span class="news_card_icon" aria-hidden="true">＋</span>' +
+          '</button>' +
+          '<div id="' + id + '" class="news_card_body" aria-hidden="true">' +
+            '<div class="news_card_body_inner">' +
+              '<p>' + bodyHtml + '</p>' +
+            '</div>' +
+          '</div>';
+
+        // アコーディオン開閉
+        var btn  = card.querySelector('.news_card_header');
+        var body_el = card.querySelector('.news_card_body');
+        var icon = card.querySelector('.news_card_icon');
+        btn.addEventListener('click', function () {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          body_el.classList.toggle('is-open', !expanded);
+          body_el.setAttribute('aria-hidden', String(expanded));
+          icon.textContent = expanded ? '＋' : '－';
+        });
+
+        return card;
+      }
+
+      // ── HTML エスケープ ───────────────────────────────────────────────
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      // ── データ取得 → レンダリング ──────────────────────────────────────
+      console.log('[News] fetch 開始 URL:', GAS_NEWS_URL);
+
+      fetch(GAS_NEWS_URL, { redirect: 'follow' })
+        .then(function (res) {
+          console.log('[News] レスポンス status:', res.status, '/ ok:', res.ok, '/ url:', res.url);
+          if (!res.ok) throw new Error('HTTP ステータス ' + res.status + ' (' + res.url + ')');
+          return res.json();
+        })
+        .then(function (data) {
+          console.log('[News] 取得データ:', data);
+          container.setAttribute('aria-busy', 'false');
+          container.innerHTML = '';
+
+          if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML =
+              '<p class="news_empty">現在、新しいお知らせはありません。</p>';
+            return;
+          }
+
+          var frag = document.createDocumentFragment();
+          data.forEach(function (item, i) {
+            frag.appendChild(createCard(item, i));
+          });
+          container.appendChild(frag);
+        })
+        .catch(function (err) {
+          console.error('[News] 取得エラー種別:', err.name);
+          console.error('[News] 取得エラー内容:', err.message);
+          console.error('[News] 取得URL:', GAS_NEWS_URL);
+          console.error('[News] エラーオブジェクト全体:', err);
+
+          var hint = err.name === 'TypeError'
+            ? '（CORSポリシーまたはネットワーク接続の問題の可能性があります）'
+            : '';
+
+          container.setAttribute('aria-busy', 'false');
+          container.innerHTML =
+            '<p class="news_error">' +
+              '【読み込みエラー】' + String(err.name) + ': ' + String(err.message) + '<br>' +
+              hint +
+              '<br><small>取得先: ' + String(GAS_NEWS_URL) + '</small>' +
+            '</p>';
+        });
+
+    }());
+  </script>
+
+</body>
+</html>

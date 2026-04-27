@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひかるくんのへや | デイサービス 友遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #2d4a0e;
+    }
+
+    /* ============================================================
+       ANIMATED GRADIENT BACKGROUND
+       上: 青空グラデーション / 下: 草原グラデーション
+    ============================================================ */
+    .hikaru_bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          #5bc8f5 0%,
+          #a8e0f8 28%,
+          #c8f0a0 55%,
+          #7ec850 80%,
+          #5aad30 100%
+        );
+      background-size: 100% 200%;
+      animation: skyShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes skyShift {
+      0%   { background-position: 0% 0%; }
+      100% { background-position: 0% 30%; }
+    }
+
+    /* 光の粒（雰囲気づくり） */
+    .hikaru_bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 75% 65%, rgba(255,255,200,0.18) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       CLOUDS
+    ============================================================ */
+    .cloud {
+      position: fixed;
+      z-index: 1;
+      background: rgba(255,255,255,0.82);
+      border-radius: 60px;
+      pointer-events: none;
+    }
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.82);
+      border-radius: 50%;
+    }
+    .cloud--1 { width: 160px; height: 46px; top: 9%;  left: -12%; animation: cloudDrift 24s linear infinite; }
+    .cloud--1::before { width: 70px;  height: 70px;  top: -34px; left: 22px; }
+    .cloud--1::after  { width: 48px;  height: 48px;  top: -22px; left: 78px; }
+    .cloud--2 { width: 110px; height: 32px; top: 17%; left: -9%;  animation: cloudDrift 34s linear 6s infinite; }
+    .cloud--2::before { width: 50px;  height: 50px;  top: -26px; left: 16px; }
+    .cloud--2::after  { width: 34px;  height: 34px;  top: -16px; left: 56px; }
+    .cloud--3 { width: 130px; height: 38px; top: 4%;  left: -11%; animation: cloudDrift 19s linear 14s infinite; }
+    .cloud--3::before { width: 58px;  height: 58px;  top: -28px; left: 20px; }
+    .cloud--3::after  { width: 38px;  height: 38px;  top: -18px; left: 66px; }
+    @keyframes cloudDrift {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(100vw + 220px)); }
+    }
+
+    /* ============================================================
+       SUN（画面右上）
+    ============================================================ */
+    .sun {
+      position: fixed;
+      top: 28px;
+      right: 56px;
+      z-index: 2;
+      width: 68px;
+      height: 68px;
+      pointer-events: none;
+    }
+    .sun_circle {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 40% 38%, #ffe566, #ffb700);
+      border-radius: 50%;
+      box-shadow: 0 0 0 10px rgba(255,200,40,0.25), 0 0 0 24px rgba(255,200,40,0.12);
+      animation: sunPulse 4s ease-in-out infinite;
+    }
+    .sun_rays {
+      position: absolute;
+      inset: -22px;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        rgba(255,220,60,0.45) 0deg 8deg,
+        transparent 8deg 22deg
+      );
+      animation: sunSpin 18s linear infinite;
+    }
+    @keyframes sunSpin  { to   { transform: rotate(360deg); } }
+    @keyframes sunPulse {
+      0%,100% { box-shadow: 0 0 0 10px rgba(255,200,40,0.25), 0 0 0 24px rgba(255,200,40,0.12); }
+      50%     { box-shadow: 0 0 0 14px rgba(255,200,40,0.30), 0 0 0 32px rgba(255,200,40,0.15); }
+    }
+
+    /* ============================================================
+       BACK BUTTON（左上固定）
+    ============================================================ */
+    .back_btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 200;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border: 2.5px solid #76b82a;
+      border-radius: 50px;
+      padding: 9px 20px 9px 14px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #3d7a10;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+    .back_btn:hover {
+      transform: translateX(-4px);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.2);
+      background: #fff;
+    }
+    .back_btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    /* ============================================================
+       PAGE LAYOUT
+    ============================================================ */
+    .hikaru_page {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 88px 20px 140px;
+      gap: 0;
+    }
+
+    /* ============================================================
+       PAGE TITLE
+    ============================================================ */
+    .hikaru_title {
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.9rem, 5.5vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 3px 0 rgba(60,120,10,0.25), 0 5px 18px rgba(0,0,0,0.15);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .hikaru_subtitle {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.18);
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* ============================================================
+       MASCOT AREA（3D視差 + クリックアニメ）
+    ============================================================ */
+    #hikaruStage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* perspective はここに設定 */
+      perspective: 800px;
+      perspective-origin: 50% 50%;
+      margin-bottom: 20px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      outline: none;
+    }
+    #hikaruStage:focus-visible {
+      outline: 3px dashed #76b82a;
+      outline-offset: 10px;
+      border-radius: 16px;
+    }
+
+    /* 視差トラッキング対象 */
+    #hikaruTilt {
+      transform-style: preserve-3d;
+      will-change: transform;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── スピーチバブル ── */
+    #speechBubble {
+      background: #fff;
+      border: 2.5px solid #5aad30;
+      border-radius: 22px;
+      padding: 10px 22px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #2d6a08;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+      position: relative;
+      margin-bottom: 16px;
+      max-width: 280px;
+      min-height: 46px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(8px) scale(0.94);
+      transition: opacity 0.22s, transform 0.22s;
+      pointer-events: none;
+    }
+    #speechBubble.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* 吹き出しの矢印 */
+    #speechBubble::after {
+      content: '';
+      position: absolute;
+      bottom: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-top-color: #5aad30;
+    }
+    #speechBubble::before {
+      content: '';
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-top-color: #fff;
+      z-index: 1;
+    }
+
+    /* ── マスコット動画（円形切り抜き） ── */
+    #bigHikaru {
+      width: clamp(170px, 30vw, 280px);
+      height: clamp(170px, 30vw, 280px); /* 円形には width と同じ高さが必要 */
+      object-fit: cover;     /* 円の中に映像をトリミング表示 */
+      border-radius: 50%;    /* 丸く切り抜く */
+      background: transparent;
+      /* 白枠＋影でメダル感を演出 */
+      outline: 4px solid rgba(255, 255, 255, 0.80);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22), 0 0 0 6px rgba(118, 184, 42, 0.18);
+      transform-origin: center center;
+      /* デフォルトのふわふわアニメ */
+      animation: hikaruFloat 3.4s ease-in-out infinite;
+      display: block;
+      min-width: 100px;
+    }
+
+    /* 動画エラー時のフォールバック表示 */
+    #bigHikaru.vid-error {
+      width: clamp(170px, 30vw, 280px);
+      height: clamp(170px, 30vw, 280px);
+      background: linear-gradient(135deg, #e8f8d0 0%, #c0e880 100%)
+                  url('images/hikaru_mascot.png') center/contain no-repeat;
+      border-radius: 50%;
+      animation: hikaruFloat 3.4s ease-in-out infinite;
+    }
+
+    /* ── クリックアニメーション ── */
+    /* A: トランポリンジャンプ */
+    #bigHikaru.anim-jump {
+      animation: hikaruJump 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards !important;
+    }
+    /* B: 高速スピン */
+    #bigHikaru.anim-spin {
+      animation: hikaruSpin 0.65s cubic-bezier(0.36,0.07,0.19,0.97) forwards !important;
+    }
+    /* C: プルプルシェイク */
+    #bigHikaru.anim-shake {
+      animation: hikaruShake 0.55s cubic-bezier(0.36,0.07,0.19,0.97) forwards !important;
+    }
+
+    @keyframes hikaruFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-16px); }
+    }
+    @keyframes hikaruJump {
+      0%   { transform: translateY(0)     scaleX(1)    scaleY(1); }
+      15%  { transform: translateY(0)     scaleX(1.20) scaleY(0.80); }
+      40%  { transform: translateY(-72px) scaleX(0.86) scaleY(1.16); }
+      60%  { transform: translateY(-20px) scaleX(1.08) scaleY(0.94); }
+      78%  { transform: translateY(0)     scaleX(0.96) scaleY(1.06); }
+      90%  { transform: translateY(-6px)  scaleX(1.02) scaleY(0.98); }
+      100% { transform: translateY(0)     scaleX(1)    scaleY(1); }
+    }
+    @keyframes hikaruSpin {
+      0%   { transform: rotate(0deg)   scale(1);    }
+      25%  { transform: rotate(120deg) scale(1.18); }
+      60%  { transform: rotate(280deg) scale(1.10); }
+      85%  { transform: rotate(350deg) scale(1.03); }
+      100% { transform: rotate(360deg) scale(1);    }
+    }
+    @keyframes hikaruShake {
+      0%,100% { transform: translateX(0)    rotate(0deg); }
+      12%     { transform: translateX(-14px) rotate(-6deg); }
+      25%     { transform: translateX(14px)  rotate(6deg); }
+      37%     { transform: translateX(-10px) rotate(-4deg); }
+      50%     { transform: translateX(10px)  rotate(4deg); }
+      62%     { transform: translateX(-6px)  rotate(-2deg); }
+      75%     { transform: translateX(6px)   rotate(2deg); }
+      88%     { transform: translateX(-2px); }
+    }
+
+    /* ── クリックヒント ── */
+    .click_hint {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.06em;
+      margin-top: 8px;
+      animation: hintPulse 2.2s ease-in-out infinite;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    @keyframes hintPulse {
+      0%,100% { opacity: 0.65; transform: scale(1); }
+      50%      { opacity: 1;    transform: scale(1.04); }
+    }
+
+    /* ── クリック回数 ── */
+    .click_counter {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.05em;
+      margin-top: 5px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .click_counter strong {
+      font-size: 1.0rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    /* ============================================================
+       SPARKLE PARTICLES
+    ============================================================ */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 300;
+      font-size: 1.3rem;
+      line-height: 1;
+      animation: sparklePop 0.75s ease forwards;
+    }
+    @keyframes sparklePop {
+      0%   { transform: translate(0,0) scale(0.3) rotate(0deg);   opacity: 1; }
+      55%  { opacity: 1; }
+      100% { transform: translate(var(--dx),var(--dy)) scale(1.0) rotate(var(--dr)); opacity: 0; }
+    }
+
+    /* ============================================================
+       CLOVER SHOWER PARTICLES
+    ============================================================ */
+    .clover_particle {
+      position: fixed;
+      top: -50px;
+      z-index: 250;
+      pointer-events: none;
+      font-size: var(--sz, 1.6rem);
+      animation: cloverFall var(--dur) ease-in forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes cloverFall {
+      0%   { transform: translateY(0px)    rotate(0deg)         translateX(0px); opacity: 1;   }
+      30%  { transform: translateY(30vh)   rotate(var(--r1))    translateX(var(--wx)); opacity: 1; }
+      70%  { transform: translateY(72vh)   rotate(var(--r2))    translateX(calc(var(--wx) * -0.6)); opacity: 0.9; }
+      100% { transform: translateY(112vh)  rotate(var(--spin))  translateX(var(--wx2)); opacity: 0; }
+    }
+
+    /* ============================================================
+       EASTER EGG OVERLAY
+    ============================================================ */
+    #easterEgg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 22px;
+    }
+    #easterEgg.is-active { display: flex; animation: eggFadeIn 0.3s ease; }
+    @keyframes eggFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .easter_card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 44px 52px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+      max-width: 360px;
+      width: 92%;
+      animation: easterIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    @keyframes easterIn {
+      from { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+      to   { transform: scale(1)   rotate(0deg);   opacity: 1; }
+    }
+    .easter_emoji { font-size: 3.2rem; margin-bottom: 10px; }
+    .easter_title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #5aad30;
+      margin-bottom: 10px;
+    }
+    .easter_text  { font-size: 0.92rem; color: #555; line-height: 1.75; }
+    .easter_close {
+      background: #76b82a;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 4px 14px rgba(118,184,42,0.4);
+      transition: background 0.15s, transform 0.15s;
+    }
+    .easter_close:hover { background: #4d9620; transform: scale(1.06); }
+
+    /* ============================================================
+       PROFILE SECTION — 「ひかるくんの秘密」
+    ============================================================ */
+    .profile_section {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 56px;
+    }
+    .profile_section_title {
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      font-weight: 900;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(40,100,5,0.28);
+      margin-bottom: 22px;
+      letter-spacing: 0.06em;
+    }
+    .profile_grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .profile_card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 22px 16px 18px;
+      text-align: center;
+      box-shadow: 0 5px 22px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.8) inset;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+      cursor: default;
+    }
+    .profile_card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.16);
+    }
+    .profile_card_icon  {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: block;
+      animation: iconBounce 3s ease-in-out infinite;
+    }
+    /* カードごとにアニメーション遅延 */
+    .profile_card:nth-child(2) .profile_card_icon { animation-delay: 0.3s; }
+    .profile_card:nth-child(3) .profile_card_icon { animation-delay: 0.6s; }
+    .profile_card:nth-child(4) .profile_card_icon { animation-delay: 0.9s; }
+    .profile_card:nth-child(5) .profile_card_icon { animation-delay: 1.2s; }
+    .profile_card:nth-child(6) .profile_card_icon { animation-delay: 1.5s; }
+    @keyframes iconBounce {
+      0%,100% { transform: translateY(0); }
+      45%     { transform: translateY(-5px); }
+      55%     { transform: translateY(-5px); }
+    }
+    .profile_card_label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #76b82a;
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .profile_card_value {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #2a4a08;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       BOTTOM NAV（固定）
+    ============================================================ */
+    .bottom_nav {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      gap: 14px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      border-radius: 50px;
+      padding: 10px 22px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.16);
+      white-space: nowrap;
+    }
+    .bottom_nav_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.16s, box-shadow 0.16s, background 0.16s;
+    }
+    .bottom_nav_btn--home {
+      background: #eef8da;
+      color: #3d7a10;
+      border: 2px solid #76b82a;
+    }
+    .bottom_nav_btn--home:hover   { background: #dff0b8; transform: scale(1.05); }
+    .bottom_nav_btn--contact {
+      background: #76b82a;
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(118,184,42,0.35);
+    }
+    .bottom_nav_btn--contact:hover { background: #4d9620; transform: scale(1.06); box-shadow: 0 6px 18px rgba(118,184,42,0.45); }
+    .bottom_nav_btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 640px) {
+      .profile_grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .sun { top: 16px; right: 24px; }
+      .sun, .sun_circle { width: 48px; height: 48px; }
+      .hikaru_page { padding-top: 72px; }
+    }
+    @media (max-width: 400px) {
+      .bottom_nav { gap: 8px; padding: 9px 14px; }
+      .bottom_nav_btn { padding: 9px 14px; font-size: 0.8rem; }
+      .profile_grid { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景 -->
+  <div class="hikaru_bg" aria-hidden="true"></div>
+
+  <!-- 雲 -->
+  <div class="cloud cloud--1" aria-hidden="true"></div>
+  <div class="cloud cloud--2" aria-hidden="true"></div>
+  <div class="cloud cloud--3" aria-hidden="true"></div>
+
+  <!-- 太陽 -->
+  <div class="sun" aria-hidden="true">
+    <div class="sun_rays"></div>
+    <div class="sun_circle"></div>
+  </div>
+
+  <!-- 戻るボタン -->
+  <a href="./index.html" class="back_btn" aria-label="トップページに戻る">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    トップページに戻る
+  </a>
+
+  <!-- メインコンテンツ -->
+  <main class="hikaru_page">
+
+    <h1 class="hikaru_title">🍀 ひかるくんのへや</h1>
+    <p class="hikaru_subtitle">クリックして、ひかるくんと遊ぼう！</p>
+
+    <!-- マスコット + 視差エリア -->
+    <div id="hikaruStage" role="button" tabindex="0"
+         aria-label="ひかるくんをクリックして遊ぶ（Enterキーでも操作できます）">
+      <div id="hikaruTilt">
+        <!-- スピーチバブル -->
+        <div id="speechBubble" role="status" aria-live="polite" aria-atomic="true"></div>
+        <!-- マスコット動画（透過PNG をポスター画像に指定して読み込み中もキャラ表示） -->
+        <video
+          id="bigHikaru"
+          src="images/hikaru.mp4.mp4"
+          poster="images/hikaru_mascot.png"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="ひかるくん"
+          preload="auto"
+        ></video>
+      </div>
+    </div>
+
+    <p class="click_hint" aria-hidden="true">👆 タップ・クリックしてみてね！</p>
+    <p class="click_counter">
+      クリック回数：<strong id="clickNum">0</strong> 回
+    </p>
+
+    <!-- ひかるくんの秘密（プロフィールカード） -->
+    <section class="profile_section" aria-label="ひかるくんの秘密">
+      <h2 class="profile_section_title">🔍 ひかるくんの秘密</h2>
+      <div class="profile_grid">
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">🍀</span>
+          <div class="profile_card_label">好きなもの</div>
+          <div class="profile_card_value">四つ葉のクローバー</div>
+        </div>
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">😊</span>
+          <div class="profile_card_label">お仕事</div>
+          <div class="profile_card_value">みんなを笑顔にすること</div>
+        </div>
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">📍</span>
+          <div class="profile_card_label">住んでいる場所</div>
+          <div class="profile_card_value">福島県 相馬市</div>
+        </div>
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">✨</span>
+          <div class="profile_card_label">特技</div>
+          <div class="profile_card_value">ふわふわ空を飛ぶこと</div>
+        </div>
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">☀️</span>
+          <div class="profile_card_label">好きな時間</div>
+          <div class="profile_card_value">お昼ご飯の後の<br>のんびりタイム</div>
+        </div>
+        <div class="profile_card">
+          <span class="profile_card_icon" aria-hidden="true">💚</span>
+          <div class="profile_card_label">大事にしていること</div>
+          <div class="profile_card_value">ひとりひとりの<br>笑顔と安心</div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /.hikaru_page -->
+
+  <!-- イースターエッグ（10回クリック） -->
+  <div id="easterEgg" aria-modal="true" role="dialog" aria-labelledby="easterTitle">
+    <div class="easter_card">
+      <div class="easter_emoji">🎉🍀🎉</div>
+      <div class="easter_title" id="easterTitle">すごい！10回もクリック！</div>
+      <p class="easter_text">
+        ひかるくんはあなたのことが大好きです！<br>
+        デイサービス 友遊で、みんなが笑顔になれる場所でお待ちしています🍀
+      </p>
+    </div>
+    <button class="easter_close" id="easterCloseBtn">とじる ✕</button>
+  </div>
+
+  <!-- ボトムナビ -->
+  <nav class="bottom_nav" aria-label="ページナビゲーション">
+    <a href="./index.html" class="bottom_nav_btn bottom_nav_btn--home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      トップページ
+    </a>
+    <a href="./index.html#contact" class="bottom_nav_btn bottom_nav_btn--contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1.16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      お問い合わせ
+    </a>
+  </nav>
+
+  <script>
+  /* ================================================================
+     hikaru.html — メインスクリプト
+     ================================================================ */
+  (function () {
+    'use strict';
+
+    /* ── DOM 参照 ────────────────────────────────── */
+    var stage      = document.getElementById('hikaruStage');
+    var tiltWrap   = document.getElementById('hikaruTilt');
+    var img        = document.getElementById('bigHikaru');
+    var bubble     = document.getElementById('speechBubble');
+    var clickNumEl = document.getElementById('clickNum');
+    var eggOverlay = document.getElementById('easterEgg');
+    var eggClose   = document.getElementById('easterCloseBtn');
+
+    /* ── 動画エラーハンドリング ──────────────────── */
+    img.addEventListener('error', function () {
+      /* 動画が再生できない場合：ポスター画像（PNG）を背景に使ったフォールバックへ */
+      img.classList.add('vid-error');
+      img.removeAttribute('src');  /* 壊れた動画を停止 */
+    });
+
+    /* 動画の自動再生ポリシーで止まった場合も念のため再試行 */
+    img.addEventListener('suspend', function () {
+      img.play && img.play().catch(function () { /* silent */ });
+    });
+
+    /* ── 状態変数 ────────────────────────────────── */
+    var clickCount  = 0;
+    var isAnimating = false;
+    var bubbleTimer = null;
+
+    /* マウス視差用 */
+    var mouseX   = window.innerWidth  / 2;
+    var mouseY   = window.innerHeight / 2;
+    var curRx    = 0;  // 現在の X軸回転（上下傾き）
+    var curRy    = 0;  // 現在の Y軸回転（左右傾き）
+    var stageRect = { cx: 0, cy: 0 };
+    var MAX_TILT  = 20; // 最大傾き角度（度）
+
+    /* ── セリフリスト ─────────────────────────────── */
+    var DIALOGUES = [
+      'やったー！🍀',
+      'もっとクリックして！✨',
+      'ありがとう〜😊',
+      'うれしいな！💚',
+      '友遊へようこそ！',
+      'えへへ、くすぐったい！',
+      'いっしょに楽しもう！',
+      '元気いっぱい！💪',
+      'いい天気だね〜☀️',
+      'お茶でも飲む？🍵',
+      'クローバー大好き🍀',
+      'まだまだ続くよ〜！',
+      'ひかるくん、飛べるよ！',
+      'たのしいね〜🎉',
+      'また来てね〜🌟'
+    ];
+    var dlgIndex = 0;
+
+    /* ── スピーチバブル表示 ──────────────────────── */
+    function showBubble(text) {
+      if (bubbleTimer) clearTimeout(bubbleTimer);
+      bubble.textContent = text;
+      bubble.classList.add('is-visible');
+      bubbleTimer = setTimeout(function () {
+        bubble.classList.remove('is-visible');
+      }, 2600);
+    }
+
+    /* ── スパークルエフェクト ────────────────────── */
+    var SPARK_EMOJIS = ['✨','🌟','💫','⭐','🍀','🌸','💚','🎉','🌈'];
+    function spawnSparkles(cx, cy) {
+      var N = 9;
+      for (var i = 0; i < N; i++) {
+        var el    = document.createElement('span');
+        el.className = 'sparkle';
+        var angle = (Math.PI * 2 / N) * i + (Math.random() - 0.5);
+        var dist  = 50 + Math.random() * 65;
+        el.textContent = SPARK_EMOJIS[Math.floor(Math.random() * SPARK_EMOJIS.length)];
+        el.style.setProperty('--dx', (Math.cos(angle) * dist).toFixed(1) + 'px');
+        el.style.setProperty('--dy', (Math.sin(angle) * dist).toFixed(1) + 'px');
+        el.style.setProperty('--dr', (Math.random() * 360 - 180).toFixed(0) + 'deg');
+        el.style.left = (cx - 12) + 'px';
+        el.style.top  = (cy - 12) + 'px';
+        document.body.appendChild(el);
+        el.addEventListener('animationend', function () { this.remove(); });
+      }
+    }
+
+    /* ── クローバーシャワー ──────────────────────── */
+    var SHOWER_EMOJIS = ['🍀','🍀','🍀','🌟','✨','🌸'];
+    function spawnCloverParticle() {
+      var el = document.createElement('span');
+      el.className = 'clover_particle';
+      el.textContent = SHOWER_EMOJIS[Math.floor(Math.random() * SHOWER_EMOJIS.length)];
+
+      var size = (1.2 + Math.random() * 1.2).toFixed(1) + 'rem';
+      var dur  = (1.6 + Math.random() * 1.6).toFixed(2) + 's';
+      var wx   = ((Math.random() - 0.5) * 80).toFixed(0) + 'px';
+      var wx2  = ((Math.random() - 0.5) * 60).toFixed(0) + 'px';
+      var r1   = (Math.random() * 360).toFixed(0) + 'deg';
+      var r2   = (Math.random() * 540).toFixed(0) + 'deg';
+      var spin = (Math.random() * 720 - 360).toFixed(0) + 'deg';
+
+      el.style.left = (Math.random() * 100).toFixed(1) + 'vw';
+      el.style.setProperty('--sz',   size);
+      el.style.setProperty('--dur',  dur);
+      el.style.setProperty('--wx',   wx);
+      el.style.setProperty('--wx2',  wx2);
+      el.style.setProperty('--r1',   r1);
+      el.style.setProperty('--r2',   r2);
+      el.style.setProperty('--spin', spin);
+
+      document.body.appendChild(el);
+      el.addEventListener('animationend', function () { this.remove(); });
+    }
+    function launchShower(count, interval) {
+      count    = count    || 20;
+      interval = interval || 48;
+      for (var i = 0; i < count; i++) {
+        (function (delay) {
+          setTimeout(spawnCloverParticle, delay);
+        })(i * interval);
+      }
+    }
+
+    /* ── クリックアニメーション ──────────────────── */
+    var ANIMS = ['anim-jump', 'anim-spin', 'anim-shake'];
+    /* 各アニメの想定最大時間（ms）+ 余裕 ── animationend が来ない場合の保険 */
+    var ANIM_DURATION = { 'anim-jump': 700, 'anim-spin': 750, 'anim-shake': 650 };
+
+    function playRandomAnim() {
+      if (isAnimating) return;
+      isAnimating = true;
+      var anim = ANIMS[Math.floor(Math.random() * ANIMS.length)];
+
+      /* CSS animation を確実にリセット（video 要素でも有効） */
+      img.style.animation = 'none';
+      void img.offsetWidth;   /* 強制リフロー */
+      img.classList.add(anim);
+
+      /* animationend を待つ */
+      var safetyTimer = null;
+
+      function cleanup() {
+        if (safetyTimer) clearTimeout(safetyTimer);
+        img.removeEventListener('animationend', onEnd);
+        img.classList.remove(anim);
+        img.style.animation = '';  /* float に戻す */
+        isAnimating = false;
+      }
+
+      function onEnd(e) {
+        /* video 要素の場合 animationName を確認してから処理 */
+        if (e && e.animationName && !e.animationName.match(/^hikaru(Jump|Spin|Shake)$/)) return;
+        cleanup();
+      }
+
+      img.addEventListener('animationend', onEnd);
+      /* 保険タイマー：animationend が発火しなかった場合に強制解除 */
+      safetyTimer = setTimeout(cleanup, ANIM_DURATION[anim] || 800);
+    }
+
+    /* ── クリックハンドラ ─────────────────────────── */
+    function handleClick(e) {
+      clickCount++;
+      if (clickNumEl) clickNumEl.textContent = clickCount;
+
+      /* クリック座標（タッチ対応） */
+      var cx = window.innerWidth  / 2;
+      var cy = window.innerHeight / 2;
+      if (e) {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          cx = e.changedTouches[0].clientX;
+          cy = e.changedTouches[0].clientY;
+        } else if (e.clientX !== undefined) {
+          cx = e.clientX;
+          cy = e.clientY;
+        }
+      }
+
+      spawnSparkles(cx, cy);
+      showBubble(DIALOGUES[dlgIndex % DIALOGUES.length]);
+      dlgIndex++;
+      playRandomAnim();
+
+      /* 3クリックごとにシャワー */
+      if (clickCount % 3 === 0) {
+        launchShower(24, 45);
+      }
+
+      /* 10クリックでイースターエッグ */
+      if (clickCount === 10) {
+        launchShower(45, 40);
+        setTimeout(function () {
+          eggOverlay.classList.add('is-active');
+          eggClose.focus();
+        }, 700);
+      }
+    }
+
+    stage.addEventListener('click', handleClick);
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleClick(null);
+      }
+    });
+
+    eggClose.addEventListener('click', function () {
+      eggOverlay.classList.remove('is-active');
+      stage.focus();
+    });
+    eggOverlay.addEventListener('click', function (e) {
+      if (e.target === eggOverlay) {
+        eggOverlay.classList.remove('is-active');
+        stage.focus();
+      }
+    });
+
+    /* ================================================================
+       マウス追従 3D 視差トラッキング
+       ================================================================
+       - stage の中心を基準にマウス位置を正規化
+       - rotateX（上下）+ rotateY（左右）を lerp でなめらかに追従
+       - アニメーション中は中心に戻る
+    ================================================================ */
+    function updateStageRect() {
+      var r = stage.getBoundingClientRect();
+      stageRect.cx = r.left + r.width  / 2;
+      stageRect.cy = r.top  + r.height / 2;
+    }
+    updateStageRect();
+    window.addEventListener('resize',  updateStageRect, { passive: true });
+    window.addEventListener('scroll',  updateStageRect, { passive: true });
+
+    /* マウス座標更新 */
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    /* タッチでも視差 */
+    document.addEventListener('touchmove', function (e) {
+      if (e.touches.length > 0) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    document.addEventListener('touchend', function () {
+      /* タッチ終了 → ゆっくり中心へ戻す */
+      mouseX = stageRect.cx;
+      mouseY = stageRect.cy;
+    }, { passive: true });
+
+    /* 線形補間ユーティリティ */
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    /* RAF ループ */
+    function trackLoop() {
+      /* ビューポート全体に対するマウス位置を正規化（-1 〜 +1） */
+      var dx = Math.max(-1, Math.min(1, (mouseX - stageRect.cx) / (window.innerWidth  * 0.5)));
+      var dy = Math.max(-1, Math.min(1, (mouseY - stageRect.cy) / (window.innerHeight * 0.5)));
+
+      /* アニメーション中は中心（0）へ向かわせる */
+      var targetRx = isAnimating ? 0 : (-dy * MAX_TILT);
+      var targetRy = isAnimating ? 0 : ( dx * MAX_TILT);
+
+      /* なめらか補間（係数 0.10 = スルスル感） */
+      curRx = lerp(curRx, targetRx, 0.10);
+      curRy = lerp(curRy, targetRy, 0.10);
+
+      tiltWrap.style.transform =
+        'perspective(800px) rotateX(' + curRx.toFixed(2) + 'deg) rotateY(' + curRy.toFixed(2) + 'deg)';
+
+      requestAnimationFrame(trackLoop);
+    }
+    requestAnimationFrame(trackLoop);
+
+    /* ================================================================
+       初回シャワー + あいさつ
+    ================================================================ */
+    setTimeout(function () {
+      launchShower(16, 55);
+      showBubble('こんにちは！🍀 遊びに来てくれてありがとう！');
+    }, 800);
+
+  })();
+  </script>
+</body>
+</html>

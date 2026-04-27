@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="求人情報｜デイサービス 友遊">
-  <title>求人情報 | デイサービス 友遊</title>
+  <meta name="description" content="送信完了｜デイサービス 友遊">
+  <title>送信完了 | デイサービス 友遊</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +15,11 @@
   <!-- ===== ヘッダー ===== -->
   <header class="top_header">
     <div class="header_inner">
+
       <h1>
-        <a href="index.html">デイサービス 友遊</a>
+        <a href="./index.html">デイサービス 友遊</a>
       </h1>
+
       <div id="nav_toggle" role="button" tabindex="0" aria-label="メニューを開閉">
         <div>
           <span></span>
@@ -26,6 +28,7 @@
           <p>MENU</p>
         </div>
       </div>
+
       <div class="header_tel">
         <a href="tel:0244-36-3582">
           <img src="https://placehold.jp/20x20.png" alt="電話アイコン">
@@ -33,6 +36,7 @@
           <span class="tel_hours">受付時間 平日8:00〜17:30</span>
         </a>
       </div>
+
       <nav class="top_nav">
         <ul>
           <li><a href="./index.html">ホーム</a></li>
@@ -44,58 +48,38 @@
               <li><a href="service.html#flow">1日の流れ</a></li>
             </ul>
           </li>
-          <li><a href="index.html#news">お知らせ</a></li>
-          <li><a href="index.html#company">会社概要</a></li>
+          <li><a href="./index.html#news">お知らせ</a></li>
+          <li><a href="./index.html#company">会社概要</a></li>
           <li><a href="./recruit.html" class="nav_recruit_btn">求人情報</a></li>
         </ul>
       </nav>
+
     </div>
   </header>
 
   <!-- ===== メインコンテンツ ===== -->
-  <main>
+  <main class="thanks_area">
+    <div class="thanks_inner">
 
-    <!-- ページタイトル -->
-    <section class="page_title_area">
-      <div class="page_title_inner">
-        <p class="page_title_en">Recruit</p>
-        <h2 class="page_title_ja">求人情報</h2>
+      <h2>メッセージありがとう！</h2>
+      <p>スタッフからすぐにお返事するから、ちょっとだけ待っててね！</p>
+
+      <div class="thanks_mascot">
+        <video src="./images/hikaru_thanks.mp4" autoplay muted loop playsinline></video>
       </div>
-    </section>
 
-    <!-- 記事本文 -->
-    <div class="notice_article_wrap">
-      <article class="notice_article">
+      <a href="./index.html" class="more_btn">トップページに戻る</a>
 
-        <h1>スタッフ募集のご案内</h1>
-
-        <p>現在、デイサービス 友遊では一緒に働くスタッフを募集しています。募集職種や勤務時間などの詳細につきましては、お気軽にお電話にてお問い合わせください。</p>
-
-        <!-- お問い合わせ先 -->
-        <div class="recruit_contact">
-          <p class="recruit_contact_label">採用に関するお問い合わせ</p>
-          <p class="recruit_tel">
-            <a href="tel:0244-36-3582">0244-36-3582</a>
-          </p>
-          <p class="recruit_hours">受付時間：平日 8:00〜17:30</p>
-        </div>
-
-        <!-- 戻るボタン -->
-        <div class="notice_back_btn">
-          <a href="./index.html" class="more_btn">トップページへ戻る</a>
-        </div>
-
-      </article>
     </div>
-
   </main>
 
   <!-- ===== フッター ===== -->
   <footer>
     <div class="footer_inner">
+
       <div class="footer_left">
         <div class="footer_logo">
-          <a href="index.html">デイサービス 友遊</a>
+          <a href="./index.html">デイサービス 友遊</a>
         </div>
         <address class="footer_address">
           <p>〒976-0036<br>福島県相馬市南飯渕字木関無９３</p>
@@ -109,9 +93,10 @@
           <p class="footer_tel_hours">受付時間 平日8:00〜17:30</p>
         </div>
       </div>
+
       <nav class="footer_nav" aria-label="フッターナビゲーション">
         <ul class="footer_nav_list">
-          <li><a href="index.html#news">▶ お知らせ</a></li>
+          <li><a href="./index.html#news">▶ お知らせ</a></li>
           <li>
             <span class="footer_nav_parent">▼ 施設案内</span>
             <ul class="footer_nav_sub">
@@ -120,17 +105,20 @@
               <li><a href="service.html#flow">▶ 1日の流れ</a></li>
             </ul>
           </li>
-          <li><a href="index.html#company">▶ 会社概要</a></li>
+          <li><a href="./index.html#company">▶ 会社概要</a></li>
           <li><a href="./recruit.html">▶ 求人情報</a></li>
         </ul>
       </nav>
+
     </div>
+
     <div class="footer_copy">
       <p>©デイサービス 友遊</p>
     </div>
   </footer>
 
   <script>
+    // ハンバーガーメニュー開閉
     const toggle = document.getElementById('nav_toggle');
     const header = document.querySelector('.top_header');
     function toggleMenu() { header.classList.toggle('open'); }
@@ -138,6 +126,8 @@
     toggle.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
     });
+
+    // ドロップダウン（スマホ：タップで展開）
     document.querySelectorAll('.has_dropdown > a').forEach(function (link) {
       link.addEventListener('click', function (e) {
         if (window.innerWidth <= 1080) {
