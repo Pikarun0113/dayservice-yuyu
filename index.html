@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <!-- bxSlider CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.bxslider/dist/jquery.bxslider.min.css">
 </head>
 <body>
 
@@ -83,34 +81,31 @@
     </div>
   </header>
 
-  <!-- ===== メインビジュアル ===== -->
+  <!-- ===== メインビジュアル（CSS クロスフェード） ===== -->
   <section class="top_mv_area">
     <div class="top_mv_wrap">
-      <ul class="slide">
+      <div class="hero-crossfade">
 
-        <!-- スライド 1 -->
-        <li>
-          <img class="img_pc" src="./images/building.jpg" alt="施設外観">
-          <img class="img_sp" src="./images/building.jpg" alt="施設外観">
-          <div class="mv_text_panel">
-            <h2>デイサービス 友遊</h2>
-            <p class="mv_catchphrase">住み慣れた地域で、<br>あなたらしい暮らしを</p>
-            <a href="./service.html" class="mv_link">詳しくはこちら</a>
-          </div>
-        </li>
+        <!-- スライド1：前面（CSS アニメーションで制御） -->
+        <div class="hero-slide hero-slide--1">
+          <img class="img_pc" src="./images/hero/hero1.jpg" alt="デイサービス友遊 施設外観">
+          <img class="img_sp" src="./images/hero/hero1.jpg" alt="デイサービス友遊 施設外観">
+        </div>
 
-        <!-- スライド 2 -->
-        <li>
-          <img class="img_pc" src="./images/room.jpg" alt="室内">
-          <img class="img_sp" src="./images/room.jpg" alt="室内">
-          <div class="mv_text_panel">
-            <h2>デイサービス 友遊</h2>
-            <p class="mv_catchphrase">笑顔があふれる、<br>憩いの場所</p>
-            <a href="./service.html" class="mv_link">詳しくはこちら</a>
-          </div>
-        </li>
+        <!-- スライド2：背面（常時表示） -->
+        <div class="hero-slide hero-slide--2">
+          <img class="img_pc" src="./images/hero/hero2.jpg" alt="デイサービス友遊 室内の様子">
+          <img class="img_sp" src="./images/hero/hero2.jpg" alt="デイサービス友遊 室内の様子">
+        </div>
 
-      </ul>
+        <!-- テキストパネル（最前面に固定） -->
+        <div class="mv_text_panel">
+          <h2>デイサービス 友遊</h2>
+          <p class="mv_catchphrase">住み慣れた地域で、<br>あなたらしい暮らしを</p>
+          <a href="./service.html" class="mv_link">詳しくはこちら</a>
+        </div>
+
+      </div>
     </div>
     <div class="top_mv_bottom"></div>
   </section>
@@ -207,6 +202,85 @@
       </ul>
 
       <p class="svc_note">その他、<strong>介護タクシー 友遊</strong>も運行しております。</p>
+
+    </div>
+  </section>
+
+  <!-- ===== 無限横スクロールバナー ===== -->
+  <section class="top_marquee_area" aria-hidden="true">
+    <div class="marquee_track">
+      <!-- セット1 -->
+      <img src="./images/marquee/marquee1.png"  alt="">
+      <img src="./images/marquee/marquee2.png"  alt="">
+      <img src="./images/marquee/marquee3.png"  alt="">
+      <img src="./images/marquee/marquee4.png"  alt="">
+      <img src="./images/marquee/marquee5.png"  alt="">
+      <img src="./images/marquee/marquee6.png"  alt="">
+      <img src="./images/marquee/marquee7.png"  alt="">
+      <img src="./images/marquee/marquee8.png"  alt="">
+      <img src="./images/marquee/marquee9.png"  alt="">
+      <img src="./images/marquee/marquee10.png" alt="">
+      <img src="./images/marquee/marquee11.png" alt="">
+      <img src="./images/marquee/marquee12.png" alt="">
+      <img src="./images/marquee/marquee13.png" alt="">
+      <img src="./images/marquee/marquee14.png" alt="">
+      <img src="./images/marquee/marquee15.png" alt="">
+      <!-- セット2（シームレスループ用） -->
+      <img src="./images/marquee/marquee1.png"  alt="">
+      <img src="./images/marquee/marquee2.png"  alt="">
+      <img src="./images/marquee/marquee3.png"  alt="">
+      <img src="./images/marquee/marquee4.png"  alt="">
+      <img src="./images/marquee/marquee5.png"  alt="">
+      <img src="./images/marquee/marquee6.png"  alt="">
+      <img src="./images/marquee/marquee7.png"  alt="">
+      <img src="./images/marquee/marquee8.png"  alt="">
+      <img src="./images/marquee/marquee9.png"  alt="">
+      <img src="./images/marquee/marquee10.png" alt="">
+      <img src="./images/marquee/marquee11.png" alt="">
+      <img src="./images/marquee/marquee12.png" alt="">
+      <img src="./images/marquee/marquee13.png" alt="">
+      <img src="./images/marquee/marquee14.png" alt="">
+      <img src="./images/marquee/marquee15.png" alt="">
+    </div>
+  </section>
+
+  <!-- ===== 表彰実績 ===== -->
+  <section id="award" class="fade-up" style="padding: 72px 0; background: linear-gradient(180deg, #fffbf0 0%, #fff 100%); border-top: 4px solid #d4af37; border-bottom: 1px solid #f0e6c0;">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 6%;">
+
+      <!-- 見出し -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #f5c842 0%, #d4940f 100%); color: #fff; font-size: 3.2rem; line-height: 1; box-shadow: 0 6px 20px rgba(212,160,23,0.4); margin-bottom: 16px;" aria-hidden="true">★</div>
+        <h2 style="font-size: 2.8rem; font-weight: 700; color: #252525; margin: 0 0 4px;">表彰実績</h2>
+        <span style="display: block; font-size: 1.2rem; color: #888; letter-spacing: 0.12em; text-transform: uppercase;">Award</span>
+      </div>
+
+      <!-- 2カラムレイアウト（PC：画像左・テキスト右 / SP：縦積み） -->
+      <div style="display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+
+        <!-- 左：アイキャッチ画像 -->
+        <div style="flex: 1.3 1 420px; min-width: 240px;">
+          <img src="./images/kuramoto_speech.png"
+               alt="第6回キラリふくしま介護賞授賞式 代表挨拶 生活相談員 倉本まり子"
+               style="width: 100%; border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,0.15); display: block;">
+        </div>
+
+        <!-- 右：テキストエリア -->
+        <div style="flex: 1.7 1 400px; min-width: 260px;">
+          <h3 style="font-size: 2rem; font-weight: 700; color: #2a6d35; line-height: 1.5; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid #d4af37;">福島県「キラリふくしま介護賞」を受賞しました</h3>
+          <p style="font-size: 1.5rem; color: #555; line-height: 1.95; margin-bottom: 28px;">デイサービス友遊を運営するNPO法人ふれあいサポート館アトリエは、創立60周年という節目の年に、労働環境や処遇改善等における優れた取り組みが評価され、福島県より「キラリふくしま介護賞」を受賞いたしました。第6回授賞式では、当施設の生活相談員である倉本まり子が、全受賞施設を代表して挨拶を行いました。</p>
+
+          <blockquote class="award_quote" style="background: #fff; border-left: 5px solid #d4af37; padding: 20px; margin-bottom: 30px; border-radius: 0 8px 8px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: relative;">
+            <p style="font-style: italic; line-height: 1.8; margin-bottom: 10px;">「『利用者か職員か』と尋ねられるような年齢の自分がこの場に立つことで、『年齢に関係なく生涯現役で働けること』を示し、介護人材の確保や介護予防に繋がればと感じています。当施設が目指すのは『アート・教育・福祉の融合』です。赤ちゃんから101歳まで、世代を超えて関わり合い、誰もが生き生きと笑顔で過ごせる居場所作りを続けてまいります。これからも広い視野を持ち、生活の中の色を明るく塗り替えられるような新たなムーブメントを起こしていきたいと決意しております」</p>
+            <p style="text-align: right; font-size: 0.9em; color: #666; margin: 0;">— 生活相談員 倉本まり子<br>（第6回授賞式 代表挨拶より）</p>
+          </blockquote>
+
+          <a href="https://youtu.be/NqNullyWA4A?t=1962" target="_blank" rel="noopener noreferrer" class="award_yt_btn" style="display: inline-block; background-color: #cc0000; color: #fff; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: all 0.3s ease;">
+            ▶ 授賞式での代表挨拶を見る（YouTube）
+          </a>
+        </div><!-- /右テキストエリア -->
+
+      </div><!-- /2カラムレイアウト -->
 
     </div>
   </section>
@@ -571,9 +645,10 @@
           <li>
             <span class="footer_nav_parent">▼ 施設案内</span>
             <ul class="footer_nav_sub">
-              <li><a href="./service.html#dayservice">▶ デイサービス 友遊</a></li>
-              <li><a href="./service.html#bathing">▶ 入浴サービス</a></li>
-              <li><a href="./service.html#flow">▶ ほっとサロン</a></li>
+              <li><a href="service.html">居宅介護支援</a></li>
+              <li><a href="service.html">デイサービス友遊</a></li>
+              <li><a href="service.html">デイサービス友遊Ⅱ</a></li>
+              <li><a href="service.html">訪問介護</a></li>
             </ul>
           </li>
           <li><a href="./index.html#company">▶ 会社概要</a></li>
@@ -605,22 +680,7 @@
   <!-- サイト共通設定（GAS URL など） -->
   <script src="./config.js"></script>
 
-  <!-- jQuery + bxSlider -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery.bxslider/dist/jquery.bxslider.min.js"></script>
-
   <script>
-    // bxSlider 初期化
-    $(document).ready(function () {
-      $('.slide').bxSlider({
-        mode: 'fade',
-        speed: 1000,
-        auto: true,
-        pager: false,
-        controls: false
-      });
-    });
-
     // ハンバーガーメニュー開閉
     const toggle = document.getElementById('nav_toggle');
     const header = document.querySelector('.top_header');
@@ -888,7 +948,7 @@
     // =============================================
     (function () {
       const mvArea = document.querySelector('.top_mv_area');
-      const imgs   = document.querySelectorAll('.top_mv_area .slide li img');
+      const imgs   = document.querySelectorAll('.hero-slide img');
       if (!mvArea || !imgs.length) return;
 
       function updateParallax() {
