@@ -534,17 +534,17 @@
     <div class="top_contact_inner fade-up">
 
       <!-- アコーディオン見出し（クリックで開閉） -->
-      <button class="contact_accordion_header" aria-expanded="false" aria-controls="contact_form_body">
+      <button class="contact_accordion_header" aria-expanded="true" aria-controls="contact_form_body">
         <div class="contact_accordion_label">
           <p class="section_sub_label">Contact</p>
           <h2 class="section_main_heading">お問い合わせ</h2>
           <p class="contact_lead">見学・ご相談など、どんな小さなことでもお気軽にどうぞ。<br>担当スタッフが丁寧にご対応いたします。</p>
         </div>
-        <span class="contact_accordion_icon" aria-hidden="true">＋</span>
+        <span class="contact_accordion_icon" aria-hidden="true">－</span>
       </button>
 
-      <!-- フォーム本体（初期非表示） -->
-      <div id="contact_form_body" class="contact_accordion_body" aria-hidden="true">
+      <!-- フォーム本体（初期展開） -->
+      <div id="contact_form_body" class="contact_accordion_body is-open" aria-hidden="false">
 
         <form id="contactForm" novalidate>
 
@@ -1276,6 +1276,6 @@
   </script>
 
 
-<a href="contact.html" class="floating-contact">📞 見学・お問い合わせ</a>
+<a href="./index.html#contact" class="floating-contact">📞 見学・お問い合わせ</a>
 </body>
 </html>
