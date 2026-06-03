@@ -40,11 +40,16 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+  font-family: "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO", "Meiryo", "メイリオ", sans-serif;
   font-size: 1.6rem;
   color: var(--color-text);
   line-height: 1.6;
   background-color: var(--color-bg);
+}
+
+h1, h2, h3 {
+  font-family: "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO", "Meiryo", "メイリオ", sans-serif;
+  font-weight: bold;
 }
 
 ul {
@@ -2759,7 +2764,7 @@ body.a11y-contrast .sjn_item.is-active {
 
 /* preタグ（施設概要の表形式テキスト） */
 .notice_article pre {
-  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+  font-family: "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN W4", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO", "Meiryo", "メイリオ", sans-serif;
   font-size: 1.4rem;
   line-height: 2.4rem;
   color: var(--color-text);
