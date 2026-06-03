@@ -2352,7 +2352,7 @@ footer {
 .service_float_nav {
   position: fixed;
   bottom: 28px;
-  right: 20px;
+  left: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -4983,7 +4983,7 @@ body.a11y-contrast .header_tel_icon {
 #hikaruMascot {
   position: fixed;
   bottom: 24px;
-  right: 20px;
+  left: 20px;
   z-index: 9000;  /* ヘッダーより手前に常駐 */
   display: flex;
   flex-direction: column;   /* bubble が上・img が下 */
@@ -5188,4 +5188,50 @@ body.a11y-contrast #hikaruBubble::after {
 body.a11y-contrast #hikaruBubble::before {
   border-top-color: #000;    /* 下向き矢印（内側） */
   border-bottom-color: transparent;
+}
+
+
+/* ============================================================
+   追従型お問い合わせボタン
+============================================================ */
+.floating-contact {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 15px 25px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.floating-contact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(243, 152, 0, 0.45);
+  background-color: var(--color-accent-dark);
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .floating-contact {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 18px;
+    font-size: 1.35rem;
+  }
+}
+
+body.a11y-contrast .floating-contact {
+  background-color: #d07f00 !important;
+  box-shadow: 0 0 0 2px #ffec00 !important;
+  color: #fff !important;
 }
