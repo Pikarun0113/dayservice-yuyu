@@ -1181,10 +1181,10 @@ body.a11y-contrast .mascot_video video {
   margin: 0 auto;
 }
 
-/* ─── PC・タブレット：2列横並び / SP：1列 ─── */
+/* ─── PC：4列横並び / タブレット以下：2列 ─── */
 .svc_grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   list-style: none;
   margin-top: 40px;
@@ -2637,21 +2637,6 @@ body.a11y-contrast .sjn_item.is-active {
 
 .company_table td a:hover {
   color: var(--color-main-dark);
-}
-
-/* ── 運営法人ブロック強調 ── */
-.company_corp_heading {
-  font-size: 1.6rem !important;
-  margin-top: 2rem !important;
-}
-
-.company_table--corp {
-  font-size: 1.7rem;
-}
-
-.company_table--corp th,
-.company_table--corp td {
-  padding: 20px 28px;
 }
 
 @media screen and (max-width: 767px) {
