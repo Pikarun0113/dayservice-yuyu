@@ -2639,6 +2639,29 @@ body.a11y-contrast .sjn_item.is-active {
   color: var(--color-main-dark);
 }
 
+/* ── 事業概要 2列グリッド ── */
+.company_facilities_grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .company_facilities_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.company_facility_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.company_facility_item .company_table {
+  margin-bottom: 0 !important;
+}
+
 @media screen and (max-width: 767px) {
   .top_company_area {
     padding: 60px 0 80px;
