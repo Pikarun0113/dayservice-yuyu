@@ -4898,6 +4898,27 @@ body.a11y-contrast .flow_digest_text p {
   color: #555;
 }
 
+.flow_notice {
+  background: #fff9f0;
+  border-left: 5px solid #f39800;
+  border-radius: 4px;
+  padding: 15px 20px;
+  margin-top: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.flow_notice p {
+  font-size: 1.35rem !important;
+  line-height: 1.8 !important;
+  color: #333 !important;
+  margin: 0;
+}
+
+.flow_notice strong {
+  color: #d97700;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 767px) {
   .flow_lead_area {
     padding: 36px 0 0;
