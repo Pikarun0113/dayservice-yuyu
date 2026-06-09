@@ -2210,6 +2210,11 @@ footer {
   transform: scale(1.04);
 }
 
+/* service1：画像なしのため余白を追加 */
+#service1 .service_section_content {
+  margin-top: 40px;
+}
+
 /* ── テキストエリア ─────────────────────── */
 .service_section_content {
   flex: 1;
