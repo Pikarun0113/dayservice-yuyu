@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="福島県相馬市の「介護(予防)事業 友遊」です。デイサービス、居宅介護支援（ケアマネージャー）、訪問介護、介護タクシーなど、住み慣れた地域でのあなたらしい暮らしを総合的にサポートします。">
   <title>介護(予防)事業 友遊 | 福島県相馬市のデイサービス・訪問介護・介護タクシー</title>
-  <link rel="stylesheet" href="./style.css?v=final34">
+  <link rel="stylesheet" href="./style.css?v=final38">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -116,7 +116,7 @@
   </section>
 
   <!-- ===== 事業内容 ===== -->
-  <section class="top_service_area">
+  <section class="top_service_area fade-in-target">
     <div class="svc_section_inner">
 
       <p class="section_sub_label">Service</p>
@@ -309,7 +309,7 @@
   </section>
 
   <!-- ===== 友遊が選ばれる3つの理由 ===== -->
-  <section class="top_reasons_area">
+  <section class="top_reasons_area fade-in-target">
     <div class="top_reasons_inner">
       <p class="section_sub_label">Why Choose Us</p>
       <h2 class="section_main_heading">友遊が選ばれる3つの理由</h2>
@@ -382,7 +382,7 @@
   </section>
 
   <!-- ===== よくあるご質問（FAQ） ===== -->
-  <section class="top_faq_area">
+  <section class="top_faq_area fade-in-target">
     <div class="top_faq_inner">
       <p class="section_sub_label">FAQ</p>
       <h2 class="section_main_heading">よくあるご質問</h2>
@@ -495,7 +495,7 @@
   </section>
 
   <!-- ===== お知らせ ===== -->
-  <section class="top_news_area" id="news">
+  <section class="top_news_area fade-in-target" id="news">
     <div class="top_news_wrap">
 
       <h3>News</h3>
@@ -873,7 +873,7 @@
 
     <!-- コピーライト -->
     <div class="footer_copy">
-      <p>©デイサービス 友遊</p>
+      <p>©介護(予防)事業 友遊</p>
     </div>
 
   </footer>
@@ -1354,7 +1354,10 @@
             return;
           }
 
-          // 最新3件のみ表示
+          // 日付降順ソート後、最新3件のみ表示
+          data.sort(function (a, b) {
+            return new Date(b.date || 0) - new Date(a.date || 0);
+          });
           var frag = document.createDocumentFragment();
           data.slice(0, 3).forEach(function (item, i) {
             frag.appendChild(createCard(item, i));
@@ -1489,5 +1492,26 @@
 
 
 <a href="./index.html#contact" class="floating-contact">📞 見学・お問い合わせ</a>
+
+  <!-- ===== fade-in-target フェードイン JS ===== -->
+  <script>
+  (function () {
+    var targets = document.querySelectorAll('.fade-in-target');
+    if (!targets.length || !window.IntersectionObserver) {
+      targets.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    targets.forEach(function (el) { observer.observe(el); });
+  }());
+  </script>
+
 </body>
 </html>

@@ -768,14 +768,15 @@ img {
   font-weight: bold;
   font-size: 1.4rem;
   white-space: nowrap;
-  transition: background-color .2s, border-color .2s;
+  transition: background-color .2s, border-color .2s, transform .3s ease, box-shadow .3s ease;
 }
 
 .hero-crossfade .mv_text_panel .mv_link:hover {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
   color: #fff;
-  box-shadow: 0 0 18px rgba(243, 152, 0, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(243, 152, 0, 0.5);
 }
 
 @media screen and (max-width: 1080px) {
@@ -1115,13 +1116,15 @@ body.a11y-contrast .mascot_video video {
   border: 2px solid var(--color-main);
   border-radius: 4px;
   text-decoration: none;
-  transition: background-color .3s, color .3s;
+  transition: background-color .3s, color .3s, transform .3s ease, box-shadow .3s ease;
   cursor: pointer;
 }
 
 .top_service_txt .more_btn:hover {
   background-color: #fff;
   color: var(--color-main);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(118, 184, 42, 0.3);
 }
 
 /* ===========================
@@ -1678,12 +1681,14 @@ body.a11y-contrast .svc_note strong {
   font-weight: bold;
   border: 2px solid var(--color-main);
   text-decoration: none;
-  transition: background-color .3s, color .3s;
+  transition: background-color .3s, color .3s, transform .3s ease, box-shadow .3s ease;
 }
 
 .more_btn:hover {
   background-color: var(--color-bg);
   color: var(--color-main);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(118, 184, 42, 0.3);
 }
 
 /* ===========================
@@ -3106,11 +3111,13 @@ body.a11y-contrast .sjn_item.is-active {
   padding: 18px 4px;
   text-align: left;
   border-radius: 6px;
-  transition: background-color 0.18s;
+  transition: background-color 0.18s, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news_card_header:hover {
   background-color: rgba(118, 184, 42, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(118, 184, 42, 0.12);
 }
 
 /* 日付 + カテゴリ */
@@ -5355,4 +5362,19 @@ body.a11y-contrast .floating-contact {
   background-color: #d07f00 !important;
   box-shadow: 0 0 0 2px #ffec00 !important;
   color: #fff !important;
+}
+
+/* ============================================================
+   fade-in-target：セクション単位のフェードイン
+   IntersectionObserver で .is-visible を付与して発火
+============================================================ */
+.fade-in-target {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-target.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
