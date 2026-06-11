@@ -3809,9 +3809,9 @@ body.a11y-contrast #scroll_progress {
   font-variant-numeric: tabular-nums;
 }
 
-/* タイトル（ドットの右に余白を作って配置） */
+/* タイトル（time削除後: header padding 4px + 106px = 110px 開始、ドット右端95pxを回避） */
 .tl_title {
-  margin-left: 30px; /* time右端(72px)からドット通過分 → タイトル開始 */
+  margin-left: 106px;
   font-size: 1.7rem;
   font-weight: bold;
   color: var(--color-text);
@@ -3860,13 +3860,13 @@ body.a11y-contrast #scroll_progress {
   overflow: hidden;
 }
 
-/* 説明文（タイトルと位置を揃える: 72px time + 30px gap = 102px） */
+/* 説明文（タイトルと位置を揃える: header padding 4px + tl_title margin 106px = 110px） */
 .tl_desc {
   font-size: 1.4rem;
   color: #666;
   line-height: 1.75;
   margin: 0;
-  padding: 4px 4px 18px 102px;
+  padding: 4px 4px 18px 110px;
 }
 
 @media screen and (max-width: 767px) {
@@ -3894,7 +3894,7 @@ body.a11y-contrast #scroll_progress {
   }
 
   .tl_title {
-    margin-left: 22px; /* 52px time + 22px gap → dot(66px center)を通過 */
+    margin-left: 74px; /* time削除後: header padding 4px + 74px = 78px 開始、ドット右端73pxを回避 */
     font-size: 1.55rem;
   }
 
@@ -3906,7 +3906,7 @@ body.a11y-contrast #scroll_progress {
 
   .tl_desc {
     font-size: 1.35rem;
-    padding-left: 74px; /* 52px + 22px */
+    padding-left: 78px; /* time削除後: header padding 4px + tl_title margin 74px = 78px */
   }
 }
 
